@@ -1,6 +1,7 @@
 
     $('.pullChevron').on('click', function () {
         $('#sidebar').toggleClass('active');
+        
     });
 
     $(document).click(function(e) {
@@ -12,7 +13,7 @@
     });
 
 
-    
+
     $(document).ready(function () {
 
         $('#list-items').html(localStorage.getItem('listItems'));
