@@ -1,0 +1,159 @@
+.wrapper {/*flex box*/
+    display: flex;
+    align-items: stretch;
+}
+
+
+#sidebar {/*side bar dimensions*/
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 100vh;
+        margin-left:-250px;
+        z-index:10;
+}
+
+.menuItems {/*contains the menu items on side bar*/
+    display: flex;
+    flex-direction: column;
+    height: 20em;
+    padding: 0;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#toggler{/*flex box for main container*/
+    display:flex;
+    justify-content: flex-end;
+    position:absolute;
+    padding:1em;
+    z-index:1;
+}
+.pullChevron{/*dynamically align chevron to center using flexbox*/
+   font-size:2em;
+   cursor: pointer;
+}
+
+#sidebar.active{
+    margin-left:0px;
+
+}
+
+
+#sidebar.active #toggler .pullChevron{
+position:relative;
+margin:0;
+color:white;
+}
+
+a, a:hover, a:focus {/*styling of sidebar anchor elements*/
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar {/*side bar color and transition property*/
+    background: #f8f8f8;
+    color:  #777777;
+    transition: all 0.3s;
+}
+
+.sidebar-header {/*sidebar padding for logo*/
+    padding:3em;
+    text-align: center;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+
+#sidebar ul li a {/*side bar style*/
+    padding: 10px;
+    font-size: 1.3em;
+    display: block;
+}
+#sidebar ul li{
+    padding-top:2em;
+    padding-bottom:2em;
+    border-bottom: 1px #e5e5e5 solid;
+
+}
+
+#sidebar ul li a:hover {/*color on hover*/
+    color:#4c8cd6
+}
+
+
+
+/******todo list***/
+
+.todoContainer{
+    margin-top:3em;
+    min-width: 50%;
+    width: 50%;
+    height:50%;
+    text-align: left;
+    color: #3b3b3b;
+    font-weight: bold;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    border:1px solid grey;
+}
+
+#list-items{
+    overflow:hidden;
+    overflow-y:scroll;
+    height:30em;
+}
+form {
+    margin-top: 5%;
+    border: 3px solid #3b3b3b;
+    height:2.8em;
+  }
+
+#inputItems{
+        position: relative;
+    height: 2.5em;
+}
+  
+  input[type="text"] {/*styling for input box*/
+    outline: 0;
+    float: left;
+    width: 66%;
+    height: 100%;
+    border: none;
+    font-size: 18px;
+    font-weight: normal;
+    padding-left: 10px;
+  }
+  
+  .add {/*styling and position for button*/
+    outline: 0;
+    float: right;
+    width: 34%;
+    height: 36px;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    background-color: #3b3b3b;
+  }
+  
+  ul {/*styling for list elements*/
+    padding: 0;
+    text-align: left;
+    list-style: none;
+  }
+  
+  hr { /*horizontal line under each item*/
+    border-bottom: 0;
+    margin: 15px 0;
+  }
+  
+  input[type="checkbox"] { 
+      width: 30px; 
+      float:left;
+    }/*imaginary spacing between item and checkbox*/
+  
+  .remove {
+    float: right;
+    cursor: pointer;
+  }
+  
+  .completed { text-decoration: line-through; }/*cross out if completed*/
