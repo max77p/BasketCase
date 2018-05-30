@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!--Project Team standard: pixels to ems-->
+<!--Project Team standard: pixels to ems-->
 
 <head>
   <title>BasketCase App</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <style>
+    /*styling for main content, carousel and footer*/
 
-
-    .main.content{
+    .main.content {
       margin: 0 auto;
       margin-top: 5%;
       max-width: 60em;
       position: relative;
-      }
+    }
 
+    #myCarousel.carousel.slide {
+      height: 100%
+    }
 
     footer {
       position: fixed;
@@ -35,7 +41,7 @@
 
     .carousel-inner img {
       width: 100%;
-      /* Set width to 100% */
+
       min-height: 200px;
       padding-block-start: -25%;
     }
@@ -54,10 +60,63 @@
       }
       /*shorten carousel controls so sidebar nav can be accessed*/
     }
+
+    @media screen and (max-height:450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
   </style>
+ 
 </head>
 
 <body>
+  <!--left side navbar-->
+  <div class="wrapper">
+    <nav id="sidebar" class="toggled">
+
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <h3>BasketKase</h3>
+        <!-- <i class="fas fa-shopping-basket"></i> -->
+
+      </div>
+
+
+      <!-- Sidebar Links -->
+      <ul class="menuItems">
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">
+            <i class="fas fa-utensils"></i> Recipes</a>
+
+        </li>
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">
+            <i class="far fa-lightbulb"></i> Get Inspired</a>
+
+        </li>
+
+        <li>
+          <a href="#" data-toggle="collapse" aria-expanded="false">
+            <i class="fas fa-birthday-cake"></i> TBD</a>
+
+        </li>
+      </ul>
+
+
+    </nav>
+
+    <div id="toggler">
+      <i class="fas fa-bars pullChevron"></i>
+    </div>
+
+
+
+  </div>
+
 
   <!-- Page Content -->
   <div class="main content">
@@ -94,7 +153,7 @@
             <p>Foodie Travel</p>
           </div>
         </div>
-
+        <!-- image -->
         <div class="item">
           <img src="assets/images/wickerwork-1314017_1920.jpg" alt="DIY">
           <div class="carousel-caption">
@@ -103,25 +162,42 @@
           </div>
         </div>
       </div>
-    
-  
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-  </div>
-</div>
-  <br>
 
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  </div>
+  <br>
+  <!--footer-->
   <footer class="container-fluid text-center">
     <p>Spotify</p>
   </footer>
+
+
+  <script>
+      $('.pullChevron').on('click', function () {
+          $('#sidebar').toggleClass('active');
+              
+        });
+      
+        $(document).click(function(e) {
+            var sidebar = $("#sidebar, .pullChevron");
+            console.log(sidebar);
+            if (!sidebar.is(e.target) && sidebar.has(e.target).length === 0) {//length of sidebar>pullchevron is greater than 0, a window object//
+              sidebar.removeClass('active')
+            }
+        });
+      
+        </script>
 
 </body>
 
