@@ -3,6 +3,9 @@
     align-items: stretch;
 }
 
+.topNav{
+    border:1px solid black;
+}
 
 #sidebar {/*side bar dimensions*/
         min-width: 15.6em;
@@ -260,10 +263,7 @@ z-index:1;
 font-size:2em;
 cursor: pointer;
 }
-/* #userAuth{
-height:100%;
-padding:1em;
-} */
+
 #userPhoto{
 height:100%;
 border:1px solid black;
@@ -305,8 +305,9 @@ margin-right:2em;
     font-size:.6em;
 }
 
-#userAuth{
+#userAuth{/*for the sign in icon*/
     padding:1em;
+    float:right
 }
 
 
@@ -320,6 +321,7 @@ margin-right:2em;
 #sidebar.active{
 margin-left:0em;
 position:absolute;
+top:0;
 }
 #sidebar.active #toggler .pullChevron{
 position:relative;
