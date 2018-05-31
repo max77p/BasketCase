@@ -24,7 +24,7 @@ $('.pullChevron').on('click', function () {
 
 });
 
-$(document).click(function (e) {
+$(document).click("#togger",function (e) {
     var sidebar = $("#sidebar, .pullChevron");
     console.log(sidebar);
     if (!sidebar.is(e.target) && sidebar.has(e.target).length === 0) {//length of sidebar>pullchevron is greater than 0, a window object//
@@ -117,6 +117,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         $('.popoverContent .name').text(userName);
         $('.popoverContent .email').text(email);
+
 
         // Show user's profile and sign-out button.
 
