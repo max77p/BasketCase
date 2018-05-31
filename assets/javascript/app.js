@@ -74,12 +74,18 @@ $(document).ready(function () {
 
 });
 
+function chromeless() {
+    var s = "width=" + 1200 + ",height=" + 200
+    var win = window.open('./login.html',"any_valid_window_name",s,true)
+    return win
+}
+
 
 var provider = new firebase.auth.GoogleAuthProvider();
 $(document).on("click", '.signIn', function (e) {
 
 
-    firebase.auth().signInWithPopup(provider).then(function (result) {
+    firebase.auth().signInWithRedirect(provider).then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         console.log(token);
@@ -101,7 +107,7 @@ $(document).on("click", '.signIn', function (e) {
         // ...
     });
 
-    firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().getRedirectResult().then(function (user) {
         if (user) { // User is signed in!
 
             // Get profile pic and user's name from the Firebase user object.
