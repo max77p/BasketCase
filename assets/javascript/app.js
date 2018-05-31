@@ -19,6 +19,13 @@ var connectedRef = database.ref(".info/connected");
 
 var messaging = firebase.messaging();
 
+
+var groceryList = database.ref("/groceryList");
+// var list=groceryList.child(user.displayName);
+
+
+
+
 $('.pullChevron').on('click', function () {
     $('#sidebar').toggleClass('active');
 
@@ -31,21 +38,36 @@ $(document).click(function (e) {
     }
 });
 
-
+var items = [];//create an array
 ////////////store list items in local storage/////////////////
 $(document).ready(function () {
 
-    $('#list-items').html(localStorage.getItem('listItems'));
+    $('#list-items').html(localStorage.getItem('listItems'));//on load populate with html from local storage
 
     $('.add-items').submit(function (event) {
         event.preventDefault();
 
-        var item = $('#todo-list-item').val();
+        var item = $('#todo-list-item').val();//get value from user input
 
         if (item) {
-            $('#list-items').append("<li><input class='checkbox' type='checkbox'/>" + item + "<a class='remove'>x</a><hr></li>");
+            $('#list-items').append("<li><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
 
-            localStorage.setItem('listItems', $('#list-items').html());
+            items.push(item);//push items into array
+
+            localStorage.setItem('listItems', $('#list-items').html());//add html data to local storage
+            localStorage.setItem('listArray', JSON.stringify(items));//keep record in localStorage
+
+
+            var user = firebase.auth().currentUser;
+            var userName = user.displayName;
+            var getLocal = JSON.parse(localStorage.getItem('listArray'));
+            console.log(userName);
+            console.log(getLocal);
+            groceryList.child(userName + "/items").set(getLocal);
+            // var user = firebase.auth().currentUser;
+            // var userName = user.displayName;
+            // var list = groceryList.child(userName+"/items");//add list to firebase
+
 
             $('#todo-list-item').val("");
         }
@@ -53,27 +75,61 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '.checkbox', function () {
-        if ($(this).attr('checked')) {
+        if ($(this).attr('checked')) {//if it has checked then clicking it will remove the checked
             $(this).removeAttr('checked');
         }
         else {
-            $(this).attr('checked', 'checked');
+            $(this).attr('checked', 'checked');//if it doesn't have the attribute, then clicked it will check it
         }
 
-        $(this).parent().toggleClass('completed');
+        $(this).parent().toggleClass('completed');//add completed class to parent
 
-        localStorage.setItem('listItems', $('#list-items').html());
+        localStorage.setItem('listItems', $('#list-items').html());//update info in local storage
     });
 
     $(document).on('click', '.remove', function () {
-        $(this).parent().remove();
+        $(this).parent().remove();//remove element that was clicked
+        var currentListItem = $(this).data('name');
+        // console.log(currentListItem);
+        var user = firebase.auth().currentUser;
+        var userName = user.displayName
 
-        localStorage.setItem('listItems', $('#list-items').html());
+        localStorage.setItem('listItems', $('#list-items').html());//update local storage with updated html
+       
+        var listings = groceryList.child(userName + "/items");
+        removeFromFB(currentListItem, listings);
+
+        listings.on("child_removed", function (snapshot) {
+            // console.log(snapshot.val());
+            var getLocal = JSON.parse(localStorage.getItem('listArray'));
+            // console.log(getLocal);
+            var location=getLocal.indexOf(snapshot.val());
+            var newItem=getLocal.splice(location,1);
+            // console.log(newItem);
+            localStorage.setItem('listArray', JSON.stringify(getLocal));
+
+        });
+
     });
 
 });
 ////////////store list items in local storage/////////////////
 
+  
+
+
+
+
+function removeFromFB(valu, path) {
+    path.on('child_added', function (data) {
+        // console.log(data.val());
+        // console.log(data.key);
+        if (data.val() === valu) {
+            path.child(data.key).remove();
+        }
+
+    });
+}
 
 
 
@@ -90,7 +146,7 @@ $(document).on("click", '.signIn', function (e) {
         var user = result.user;
         console.log(user);
 
-        
+
 
         // ...
     }).catch(function (error) {
@@ -103,30 +159,6 @@ $(document).on("click", '.signIn', function (e) {
         var credential = error.credential;
         // ...
     });
-
-    firebase.auth().onAuthStateChanged().then(function (user) {
-        if (user) { // User is signed in!
-
-            // Get profile pic and user's name from the Firebase user object.
-            var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
-            var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
-            var email = user.email;
-
-            // Set the user's profile pic and name.
-
-            // var img = $('<img src="' + profilePicUrl + '"id="profile">');
-            // var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
-            // $('.manIcon').hide();
-            // $('#profile1').append(img);
-            // $('.firstRow').append(img2);
-           
-
-
-        } else { // User is signed out!
-            
-        }
-    });
-
 
 })
 
@@ -154,10 +186,10 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         // Hide sign-in button.
 
-
         // We load currently existing chant messages.
 
-
+        var getLocal = JSON.parse(localStorage.getItem('listArray'));
+        groceryList.child(userName + "/items").set(getLocal);
         // We save the Firebase Messaging Device token and enable notifications.
 
 
@@ -165,7 +197,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         // $('#profile').attr("src", profilePicUrl);
         // Hide user's profile and sign-out button.
         // $('#profile').hide();
-        
+
         $('.manIcon').show();
         $('#profile').remove();
         $('.firstRow #profileInside').remove();
@@ -181,20 +213,20 @@ $(document).on("click", ".signOut", function () {
     console.log(user1);
 
 
-    user1.delete().then(function () {
-        console.log("signed out");
-    }).catch(function (error) {
-        // An error happened.
-    });
+    // user1.delete().then(function () {
+    //     console.log("signed out");
+    // }).catch(function (error) {
+    //     // An error happened.
+    // });
     firebase.auth().signOut().then(function (e) {
         console.log('Signed Out');
-        checkUser();
+        checkUser();/*for testing*/
     }, function (error) {
         console.error('Sign Out Error', error);
     });
 });
 
-function checkUser() {
+function checkUser() {/*for testing only*/
 
     var user = firebase.auth().currentUser;
     console.log(user);
