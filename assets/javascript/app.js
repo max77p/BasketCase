@@ -111,11 +111,11 @@ $(document).on("click", '.signIn', function (e) {
 
             // Set the user's profile pic and name.
 
-            var img = $('<img src="' + profilePicUrl + '"id="profile">');
-            var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
-            $('.manIcon').hide();
-            $('#profile1').append(img);
-            $('.firstRow').append(img2);
+            // var img = $('<img src="' + profilePicUrl + '"id="profile">');
+            // var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
+            // $('.manIcon').hide();
+            // $('#profile1').append(img);
+            // $('.firstRow').append(img2);
            
 
 
@@ -140,15 +140,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         // Set the user's profile pic and name.
 
-
-        $('#profile').show();//show
-        $('#profile').attr("src", profilePicUrl);
-        $('#profileInside').attr("src", profilePicUrl);
-
         $('.popoverContent .name').text(userName);
         $('.popoverContent .email').text(email);
-
-
         // Show user's profile and sign-out button.
         var img = $('<img src="' + profilePicUrl + '"id="profile">');
         var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
@@ -168,8 +161,13 @@ firebase.auth().onAuthStateChanged(function (user) {
     } else { // User is signed out!
         // $('#profile').attr("src", profilePicUrl);
         // Hide user's profile and sign-out button.
-        $('#profile').hide();
+        // $('#profile').hide();
+        
         $('.manIcon').show();
+        $('#profile').remove();
+        $('.firstRow #profileInside').remove();
+        $('.name').text("");
+        $('.email').text("");
         // Show sign-in button.
 
     }
