@@ -74,19 +74,32 @@
         <div id="userAuth">
 
 
-            <a href="#" id="profile1"  data-placement="bottom" data-trigger="focus">
-                <span><i class="fas fa-user"></i></span>
-                <img src="#" id="profile" alt="profilephoto">
+            <a href="#" id="profile1" data-toggle="popover" data-placement="bottom" data-trigger="focus">
+                <span>
+                    <i class="fas fa-user manIcon"></i>
+                </span>
+                <!-- <img src="#" id="profile" alt="profilephoto"> -->
             </a>
 
-            <div class="popoverContent hide">
-                <h6 class="name"></h6>
-                <h6 class="email"></h6>
+
+        </div>
+
+        <div class="popoverContent hide">
+            <div class="firstRow">
+                <div class="nameOutter">
+                    <p class="name"></p>
+                    <p class="email"></p>
+                </div>
+                <!-- <img src="#" id="profileInside" alt="profilephoto"> -->
+            </div>
+
+            <div class="secondRow">
                 <button class="signOut" type="submit">sign out</button>
                 <button class="signIn" type="submit">sign in</button>
             </div>
 
         </div>
+
     </div>
 
 

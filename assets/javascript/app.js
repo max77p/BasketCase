@@ -86,6 +86,9 @@ $(document).on("click", '.signIn', function (e) {
         // The signed-in user info.
         var user = result.user;
         console.log(user);
+
+        
+
         // ...
     }).catch(function (error) {
         // Handle Errors here.
@@ -96,6 +99,29 @@ $(document).on("click", '.signIn', function (e) {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         // ...
+    });
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) { // User is signed in!
+
+            // Get profile pic and user's name from the Firebase user object.
+            var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
+            var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
+            var email = user.email;
+
+            // Set the user's profile pic and name.
+
+            var img = $('<img src="' + profilePicUrl + '"id="profile">');
+            var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
+            $('.manIcon').hide();
+            $('#profile1').append(img);
+            $('.firstRow').append(img2);
+           
+
+
+        } else { // User is signed out!
+            
+        }
     });
 
 
@@ -109,18 +135,26 @@ firebase.auth().onAuthStateChanged(function (user) {
         var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
         var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
         var email = user.email;
+        console.log(email);
         console.log(user.photoURL);
 
         // Set the user's profile pic and name.
-        $('#profile').show();
+
+
+        $('#profile').show();//show
         $('#profile').attr("src", profilePicUrl);
+        $('#profileInside').attr("src", profilePicUrl);
 
         $('.popoverContent .name').text(userName);
         $('.popoverContent .email').text(email);
 
 
         // Show user's profile and sign-out button.
-
+        var img = $('<img src="' + profilePicUrl + '"id="profile">');
+        var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
+        $('.manIcon').hide();
+        $('#profile1').append(img);
+        $('.firstRow').append(img2);
 
         // Hide sign-in button.
 
@@ -131,32 +165,41 @@ firebase.auth().onAuthStateChanged(function (user) {
         // We save the Firebase Messaging Device token and enable notifications.
 
 
-
     } else { // User is signed out!
+        // $('#profile').attr("src", profilePicUrl);
         // Hide user's profile and sign-out button.
         $('#profile').hide();
+        $('.manIcon').show();
         // Show sign-in button.
 
     }
 });
 
-$(document).on("click",".signOut",function(){
-    firebase.auth().signOut().then(function () {
+$(document).on("click", ".signOut", function () {
+    var user1 = firebase.auth().currentUser;
+    console.log(user1);
+
+
+    user1.delete().then(function () {
+        console.log("signed out");
+    }).catch(function (error) {
+        // An error happened.
+    });
+    firebase.auth().signOut().then(function (e) {
         console.log('Signed Out');
+        checkUser();
     }, function (error) {
         console.error('Sign Out Error', error);
     });
-
 });
 
+function checkUser() {
 
- 
+    var user = firebase.auth().currentUser;
+    console.log(user);
+}
 
 
-
-
-
-var user = firebase.auth().currentUser;
 $(document).ready(function () {
     $('#profile1').popover({
         html: true,

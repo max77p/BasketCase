@@ -34,10 +34,7 @@
    cursor: pointer;
 }
 
-#userAuth{
-    height:100%;
-    padding:1em;
-}
+
 #userPhoto{
    height:100%;
     border:1px solid black;
@@ -263,21 +260,63 @@ z-index:1;
 font-size:2em;
 cursor: pointer;
 }
-#userAuth{
+/* #userAuth{
 height:100%;
 padding:1em;
-}
+} */
 #userPhoto{
 height:100%;
 border:1px solid black;
 }
-#profile{
+#profile,#profileInside{
 border-radius:20em;
 height:3.4em;
 }
 .popover{
 margin-right:2em;
 }
+
+
+.popoverContent{
+    border:1px solid black;
+    padding:.5em;
+}
+.firstRow{
+    height: 5em;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 17em;
+    border-bottom:1px solid #777777;
+}
+.secondRow{
+    display:flex;
+    justify-content: space-between;
+}
+
+.nameOutter .name{
+    margin:0;
+    font-size:.7em;
+    font-weight:bold;
+}
+
+.nameOutter .email{
+    margin:0;
+    font-size:.6em;
+}
+
+#userAuth{
+    padding:1em;
+}
+
+
+
+
+
+
+
+
+
 #sidebar.active{
 margin-left:0em;
 position:absolute;
