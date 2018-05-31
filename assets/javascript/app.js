@@ -85,7 +85,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 $(document).on("click", '.signIn', function (e) {
 
 
-    firebase.auth().signInWithRedirect(provider).then(function (result) {
+    firebase.auth().signInWithPopup(provider).then(function (result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         console.log(token);
@@ -107,7 +107,7 @@ $(document).on("click", '.signIn', function (e) {
         // ...
     });
 
-    firebase.auth().getRedirectResult().then(function (user) {
+    firebase.auth().onAuthStateChanged().then(function (user) {
         if (user) { // User is signed in!
 
             // Get profile pic and user's name from the Firebase user object.
