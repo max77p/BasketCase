@@ -82,85 +82,53 @@ var provider = new firebase.auth.GoogleAuthProvider();
 $(document).on("click", '.signIn', function (e) {
 
 
-    // firebase.auth().signInWithPopup(provider).then(function (result) {
-    //     // This gives you a Google Access Token. You can use it to access the Google API.
-    //     var token = result.credential.accessToken;
-    //     console.log(token);
-    //     // The signed-in user info.
-    //     var user = result.user;
-    //     console.log(user);
+    firebase.auth().signInWithPopup(provider).then(function (result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        console.log(token);
+        // The signed-in user info.
+        var user = result.user;
+        console.log(user);
 
         
 
-    //     // ...
-    // }).catch(function (error) {
-    //     // Handle Errors here.
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     // The email of the user's account used.
-    //     var email = error.email;
-    //     // The firebase.auth.AuthCredential type that was used.
-    //     var credential = error.credential;
-    //     // ...
-    // });
+        // ...
+    }).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+    });
 
-    firebase.auth().signInWithRedirect(provider);
+    firebase.auth().onAuthStateChanged().then(function (user) {
+        if (user) { // User is signed in!
 
-    // firebase.auth().onAuthStateChanged().then(function (user) {
-    //     if (user) { // User is signed in!
+            // Get profile pic and user's name from the Firebase user object.
+            var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
+            var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
+            var email = user.email;
 
-    //         // Get profile pic and user's name from the Firebase user object.
-    //         var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
-    //         var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
-    //         var email = user.email;
+            // Set the user's profile pic and name.
 
-    //         // Set the user's profile pic and name.
-
-    //         // var img = $('<img src="' + profilePicUrl + '"id="profile">');
-    //         // var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
-    //         // $('.manIcon').hide();
-    //         // $('#profile1').append(img);
-    //         // $('.firstRow').append(img2);
+            // var img = $('<img src="' + profilePicUrl + '"id="profile">');
+            // var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
+            // $('.manIcon').hide();
+            // $('#profile1').append(img);
+            // $('.firstRow').append(img2);
            
 
 
-    //     } else { // User is signed out!
+        } else { // User is signed out!
             
-    //     }
-    // });
+        }
+    });
 
 
 })
-
-firebase.auth().getRedirectResult().then(function(result) {
-    if (result.credential) {
-        var thisUser=result.user;
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = result.credential.accessToken;
-      // ...
-      var profilePicUrl = thisUser.photoURL;   // TODO(DEVELOPER): Get profile pic.
-         var userName = thisUser.displayName;        // TODO(DEVELOPER): Get user's name.
-         var email = thisUser.email;
-
-
-        //  var img = $('<img src="' + profilePicUrl + '"id="profile">');
-        // var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
-        // $('.manIcon').hide();
-        // $('#profile1').append(img);
-        // $('.firstRow').append(img2);
-    }
-    // The signed-in user info.
-    var user = result.user;
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
 
 
 firebase.auth().onAuthStateChanged(function (user) {
