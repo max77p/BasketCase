@@ -64,9 +64,6 @@ $(document).ready(function () {
             console.log(userName);
             console.log(getLocal);
             groceryList.child(userName + "/items").set(getLocal);
-            // var user = firebase.auth().currentUser;
-            // var userName = user.displayName;
-            // var list = groceryList.child(userName+"/items");//add list to firebase
 
 
             $('#todo-list-item').val("");
@@ -181,16 +178,26 @@ firebase.auth().onAuthStateChanged(function (user) {
         var img = $('<img src="' + profilePicUrl + '"id="profile">');
         var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
         $('.manIcon').hide();
-        $('#profile1').append(img);
+        $('.profile1').append(img);
         $('.firstRow').append(img2);
 
         // Hide sign-in button.
 
         // We load currently existing chant messages.
 
-        var getLocal = JSON.parse(localStorage.getItem('listArray'));
-        groceryList.child(userName + "/items").set(getLocal);
-        // We save the Firebase Messaging Device token and enable notifications.
+        // var getLocal = JSON.parse(localStorage.getItem('listArray'));
+        // groceryList.child(userName + "/items").set(getLocal);
+
+       //when user connects load their info to the screen and set the localstorage, in case of browser clear
+        var sendToLocal=[];
+        var listings = groceryList.child(userName + "/items");
+        listings.on("child_added", function (snapshot) {
+            console.log(snapshot.val());
+            sendToLocal.push(snapshot.val());
+        
+            localStorage.setItem('listArray', JSON.stringify(sendToLocal));
+
+        });
 
 
     } else { // User is signed out!
