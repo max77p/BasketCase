@@ -61,10 +61,8 @@ $(document).ready(function () {
             var user = firebase.auth().currentUser;
             var userName = user.displayName;
             var getLocal = JSON.parse(localStorage.getItem('listArray'));
-            console.log(userName);
-            console.log(getLocal);
+           
             groceryList.child(userName + "/items").set(getLocal);
-
 
             $('#todo-list-item').val("");
         }
@@ -87,50 +85,28 @@ $(document).ready(function () {
     $(document).on('click', '.remove', function () {
         $(this).parent().remove();//remove element that was clicked
         var currentListItem = $(this).data('name');
-        // console.log(currentListItem);
+        console.log(currentListItem);
         var user = firebase.auth().currentUser;
         var userName = user.displayName
 
         localStorage.setItem('listItems', $('#list-items').html());//update local storage with updated html
        
         var listings = groceryList.child(userName + "/items");
-        removeFromFB(currentListItem, listings);
+        // removeFromFB(currentListItem, listings);
 
-        listings.on("child_removed", function (snapshot) {
-            // console.log(snapshot.val());
+            
             var getLocal = JSON.parse(localStorage.getItem('listArray'));
-            // console.log(getLocal);
-            var location=getLocal.indexOf(snapshot.val());
+            console.log(getLocal);
+            var location=getLocal.indexOf(currentListItem);
             var newItem=getLocal.splice(location,1);
-            // console.log(newItem);
             localStorage.setItem('listArray', JSON.stringify(getLocal));
 
-        });
+            groceryList.child(userName + "/items").set(getLocal);
 
     });
 
 });
 ////////////store list items in local storage/////////////////
-
-  
-
-
-
-
-function removeFromFB(valu, path) {
-    path.on('child_added', function (data) {
-        // console.log(data.val());
-        // console.log(data.key);
-        if (data.val() === valu) {
-            path.child(data.key).remove();
-        }
-
-    });
-}
-
-
-
-
 var provider = new firebase.auth.GoogleAuthProvider();
 $(document).on("click", '.signIn', function (e) {
 
@@ -178,26 +154,16 @@ firebase.auth().onAuthStateChanged(function (user) {
         var img = $('<img src="' + profilePicUrl + '"id="profile">');
         var img2 = $('<img src="' + profilePicUrl + '"id="profileInside">');
         $('.manIcon').hide();
-        $('.profile1').append(img);
+        $('#profile1').append(img);
         $('.firstRow').append(img2);
 
         // Hide sign-in button.
 
         // We load currently existing chant messages.
 
-        // var getLocal = JSON.parse(localStorage.getItem('listArray'));
-        // groceryList.child(userName + "/items").set(getLocal);
-
-       //when user connects load their info to the screen and set the localstorage, in case of browser clear
-        var sendToLocal=[];
-        var listings = groceryList.child(userName + "/items");
-        listings.on("child_added", function (snapshot) {
-            console.log(snapshot.val());
-            sendToLocal.push(snapshot.val());
-        
-            localStorage.setItem('listArray', JSON.stringify(sendToLocal));
-
-        });
+        var getLocal = JSON.parse(localStorage.getItem('listArray'));
+        groceryList.child(userName + "/items").set(getLocal);
+        // We save the Firebase Messaging Device token and enable notifications.
 
 
     } else { // User is signed out!
