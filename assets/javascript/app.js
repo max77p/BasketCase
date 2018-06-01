@@ -38,27 +38,34 @@ $(document).click(function (e) {
     }
 });
 
-var items = [];//create an array
+
 ////////////store list items in local storage/////////////////
 $(document).ready(function () {
     $('#list-items').html(localStorage.getItem('listItems'));//on load populate with html from local storage
+
     $('.add-items').submit(function (event) {
         event.preventDefault();
         var item = $('#todo-list-item').val();//get value from user input
+
         if (item) {
             $('#list-items').append("<li><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
 
-            items.push(item);//push items into array
 
             localStorage.setItem('listItems', $('#list-items').html());//add html data to local storage
-            localStorage.setItem('listArray', JSON.stringify(items));//keep record in localStorage
+            // localStorage.setItem('listArray', JSON.stringify(items));//keep record in localStorage
 
 
             var user = firebase.auth().currentUser;
             var userName = user.displayName;
-            var getLocal = JSON.parse(localStorage.getItem('listArray'));
+            // var getLocal = JSON.parse(localStorage.getItem('listArray'));
 
-            groceryList.child(userName + "/items").set(getLocal);
+            groceryList.child(userName + "/items").push(item);//push grocery items to firebase
+            var listings = groceryList.child(userName + "/items");
+            listings.on("value", function (snapshot) {
+                console.log(snapshot.val());
+                localStorage.setItem('listArray', JSON.stringify(snapshot.val()));//update local storage item array anytime change happens 
+            });
+
 
             $('#todo-list-item').val("");
         }
@@ -85,13 +92,15 @@ $(document).ready(function () {
         localStorage.setItem('listItems', $('#list-items').html());//update local storage with updated html
 
         var listings = groceryList.child(userName + "/items");
-        // removeFromFB(currentListItem, listings);
-        var getLocal = JSON.parse(localStorage.getItem('listArray'));
-        console.log(getLocal);
-        var location = getLocal.indexOf(currentListItem);
-        var newItem = getLocal.splice(location, 1);
-        localStorage.setItem('listArray', JSON.stringify(getLocal));
-        groceryList.child(userName + "/items").set(getLocal);
+        listings.once("value").then(function (snapshot) {//when remove is clicked remove item from firebase
+            snapshot.forEach(function (childSnapshot) {
+                console.log(childSnapshot.val());
+                console.log(childSnapshot.key);
+                if (childSnapshot.val() === currentListItem) {
+                    listings.child(childSnapshot.key).remove();
+                }
+            });
+        });
     });
 
 });
@@ -144,8 +153,11 @@ $(document).on("click", '.signIn', function (e) {
             });
             groceryList.child(userName + "/itemsHtml").on("value", function (snapshot) {
                 console.log(snapshot.val());
-                localStorage.setItem('listItems', snapshot.val());
-                $('#list-items').html(localStorage.getItem('listItems'));
+                if (snapshot.val() != null) {
+                    localStorage.setItem('listItems', snapshot.val());
+                    $('#list-items').html(localStorage.getItem('listItems'));
+                }
+
             });
 
 
@@ -216,11 +228,11 @@ $(document).on("click", ".signOut", function () {
     var user1 = firebase.auth().currentUser;
     var userName = user1.displayName;
     console.log(user1);
-    var getLocal = JSON.parse(localStorage.getItem('listArray'));//on signout save local storage
-    groceryList.child(userName + "/items").set(getLocal);
+    var updateFromLocalArray = JSON.parse(localStorage.getItem('listArray'));//on signout save local storage
+    groceryList.child(userName + "/items").set(updateFromLocalArray);
 
-    var getLocal = localStorage.getItem('listItems')
-    groceryList.child(userName + "/itemsHtml").set(getLocal);
+    var getLocalHtml = localStorage.getItem('listItems')
+    groceryList.child(userName + "/itemsHtml").set(getLocalHtml);
     localStorage.clear();
     $('#list-items').empty();
     // user1.delete().then(function () {
