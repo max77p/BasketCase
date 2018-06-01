@@ -61,7 +61,7 @@ $(document).ready(function () {
             var user = firebase.auth().currentUser;
             var userName = user.displayName;
             var getLocal = JSON.parse(localStorage.getItem('listArray'));
-           
+
             groceryList.child(userName + "/items").set(getLocal);
 
             $('#todo-list-item').val("");
@@ -90,22 +90,24 @@ $(document).ready(function () {
         var userName = user.displayName
 
         localStorage.setItem('listItems', $('#list-items').html());//update local storage with updated html
-       
+
         var listings = groceryList.child(userName + "/items");
         // removeFromFB(currentListItem, listings);
 
-            
-            var getLocal = JSON.parse(localStorage.getItem('listArray'));
-            console.log(getLocal);
-            var location=getLocal.indexOf(currentListItem);
-            var newItem=getLocal.splice(location,1);
-            localStorage.setItem('listArray', JSON.stringify(getLocal));
 
-            groceryList.child(userName + "/items").set(getLocal);
+        var getLocal = JSON.parse(localStorage.getItem('listArray'));
+        console.log(getLocal);
+        var location = getLocal.indexOf(currentListItem);
+        var newItem = getLocal.splice(location, 1);
+        localStorage.setItem('listArray', JSON.stringify(getLocal));
+
+        groceryList.child(userName + "/items").set(getLocal);
 
     });
 
 });
+
+
 ////////////store list items in local storage/////////////////
 var provider = new firebase.auth.GoogleAuthProvider();
 $(document).on("click", '.signIn', function (e) {
@@ -132,6 +134,46 @@ $(document).on("click", '.signIn', function (e) {
         var credential = error.credential;
         // ...
     });
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) { // User is signed in!
+
+            // Get profile pic and user's name from the Firebase user object.
+            var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
+            var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
+            var email = user.email;
+            console.log(email);
+            console.log(user.photoURL);
+
+            // Hide sign-in button.
+
+            groceryList.child(userName + "/items").on("value", function (snapshot) {
+                console.log(snapshot.val());
+
+                localStorage.setItem('listArray', JSON.stringify(snapshot.val()));
+
+            });
+            groceryList.child(userName + "/itemsHtml").on("value", function (snapshot) {
+                console.log(snapshot.val());
+                localStorage.setItem('listItems', snapshot.val());
+                $('#list-items').html(localStorage.getItem('listItems'));
+            });
+
+
+
+
+            // We load currently existing chant messages.
+
+            // We save the Firebase Messaging Device token and enable notifications.
+
+
+        } else { // User is signed out!
+            // $('#profile').attr("src", profilePicUrl);
+
+
+        }
+    });
+
 
 })
 
@@ -161,9 +203,9 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         // We load currently existing chant messages.
 
-        var getLocal = JSON.parse(localStorage.getItem('listArray'));
-        groceryList.child(userName + "/items").set(getLocal);
+
         // We save the Firebase Messaging Device token and enable notifications.
+
 
 
     } else { // User is signed out!
@@ -183,9 +225,15 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 $(document).on("click", ".signOut", function () {
     var user1 = firebase.auth().currentUser;
+    var userName = user1.displayName;
     console.log(user1);
+    var getLocal = JSON.parse(localStorage.getItem('listArray'));//on signout save local storage
+    groceryList.child(userName + "/items").set(getLocal);
 
-
+    var getLocal = localStorage.getItem('listItems')
+    groceryList.child(userName + "/itemsHtml").set(getLocal);
+    localStorage.clear();
+    $('#list-items').empty();
     // user1.delete().then(function () {
     //     console.log("signed out");
     // }).catch(function (error) {
@@ -200,7 +248,6 @@ $(document).on("click", ".signOut", function () {
 });
 
 function checkUser() {/*for testing only*/
-
     var user = firebase.auth().currentUser;
     console.log(user);
 }
