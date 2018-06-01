@@ -243,6 +243,25 @@ $(document).ready(function () {
 });
 
 
+//////toggle options at bottom of list//////
+$('input:radio[name=options]').change(function (e) {
+    e.preventDefault();
+    var radioBtn = $(this)[0].id;
+    console.log(radioBtn);
+    var get = $('#list-items');
+    console.log(get);
+    //  console.log(get[0].children);
+    var listitems = get[0].children;
+
+    if (radioBtn === "option2") {//for when user clicks completed button, then show only completed
+        $('li:not(.completed)').hide();
+        console.log(listitems[0].className);
+        console.log(get[0].children)
+    }
+    else if (radioBtn === "option1") {
+        $('li').show();
+    }
+});
 
 
 // queryURL = "https://api.edamam.com/search?q=chicken&app_id=540719b1&app_key=2d98d59eaf4976edb2d1abd92540e167"
@@ -259,12 +278,6 @@ $(document).ready(function () {
 //     $('.card-img-top').attr("src",testimg);
 // }
 // );
-
-
-
-
-
-
 
       //TODO-api random images to carousal
       //TODO-add left side bar to carousal page

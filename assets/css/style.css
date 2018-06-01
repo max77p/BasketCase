@@ -38,30 +38,10 @@
 }
 
 
-#userPhoto{
-   height:100%;
-    border:1px solid black;
-}
-#profile{
-    border-radius:20em;
-    height:3.2em;
-    padding:.3em;
-}
-.profile1{
-    padding-right: 1em;
-    padding-top: .3em;
-   
-}
-
-.popover{
-    margin-right:2em;
-}
-
 #sidebar.active{
     margin-left:0em;
     position:absolute;
 }
-
 
 #sidebar.active #toggler .pullChevron{
 position:relative;
@@ -116,12 +96,12 @@ footer {
     }
 
 
-/******todo list***/
-
+/******todo list**********************************************/
 .todoContainer{
     /* margin-top:3em; */
     min-width: 50%;
     padding:1em;
+    padding-bottom:0;
     max-width: 50em;
     max-height:50em;
     text-align: left;
@@ -129,6 +109,35 @@ footer {
     font-weight: bold;
     font-family: 'Helvetica', 'Arial', sans-serif;
     border:1px solid grey;
+}
+
+.listToggleBtns{
+    display:flex;
+    justify-content: center;
+    padding-top:1em;
+}
+.btn.active.focus{
+    outline: none !important;
+    background-color:#3b3b3b;
+    color:white;
+    box-shadow:none !important;
+    /* border:1px solid black; */
+}
+
+
+.toggleBtnStyle{
+    width:6em;
+    padding: 10px 15px;
+	background: #fafafa;
+    color: black;
+    -webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+	/* border: solid 1px #20538D; */
+	/* text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4); */
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2) !important;
 }
 
 #list-items{
@@ -194,53 +203,6 @@ form {
   .completed { text-decoration: line-through; }/*cross out if completed*/
 
 
-  /*-------------ananya styling-----------------------*/
-
-  #textCenter{
-    text-align: center;
-}
-.card{
-    border-style: none;
-    background-color: antiquewhite;
-}
-
-#searchBar{
-    width: 100%;
-    border-style: none;
-    font-family: 'Poppins', sans-serif;
-    background-color: lightgray;
-    border-radius: 0.15em;
-    padding: 10px;
-    overflow: hidden;
-    display: flex;
-    height: auto;
-}
-#searchIcon,#searchInput{
-    padding:0.3125em;
-    border-style: none;
-    font-family: 'Poppins', sans-serif;
-    background-color: lightgray;
-    border-radius: 0.15em;
-}
-#searchInput{
-    width: 100%;
-}
-
-
-
-
-
-
-#cardBody {
-    padding: 10px;
-    font-size: 14px;
-    font-family: 'Dosis', sans-serif;
-}
-.card-title {
-    font-size: 17px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bolder;
-}
 
 #sidebar {/*side bar dimensions*/
     min-width: 15.6em;
@@ -258,6 +220,8 @@ padding: 0;
 justify-content: space-between;
 text-align: center;
 }
+
+/*icon to pull out menue*/
 #toggler{/*flex box for main container*/
 display:flex;
 justify-content: flex-end;
@@ -270,6 +234,25 @@ font-size:2em;
 cursor: pointer;
 }
 
+/*google sign in user photo*/
+/*user sign in styling*/
+.signOut:focus,.signOut:active,.signOut:hover,.signIn:focus,.signIn:active,.signIn:hover{
+    outline: none !important;
+    background-color:#3b3b3b;
+    color:white;
+    box-shadow:none !important;
+}
+ #profile{
+     border-radius:20em;
+     height:3.2em;
+     padding:.3em;
+ }
+ .profile1{
+     padding-right: 1em;
+     padding-top: .3em;
+    
+ }
+
 #userPhoto{
 height:100%;
 border:1px solid black;
@@ -281,8 +264,6 @@ height:3.4em;
 .popover{
 margin-right:2em;
 }
-
-
 .popoverContent{
     border:1px solid black;
     padding:.5em;
@@ -298,6 +279,10 @@ margin-right:2em;
 .secondRow{
     display:flex;
     justify-content: space-between;
+    background-color:#f5f5f5;
+}
+.signOut,.signIn{
+    background-color:#f5f5f5;
 }
 
 .nameOutter .name{
@@ -323,7 +308,7 @@ margin-right:2em;
 }
 
 
-
+/*side bar styling*/
 #sidebar.active{
 margin-left:0em;
 position:absolute;
