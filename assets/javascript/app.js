@@ -41,14 +41,10 @@ $(document).click(function (e) {
 var items = [];//create an array
 ////////////store list items in local storage/////////////////
 $(document).ready(function () {
-
     $('#list-items').html(localStorage.getItem('listItems'));//on load populate with html from local storage
-
     $('.add-items').submit(function (event) {
         event.preventDefault();
-
         var item = $('#todo-list-item').val();//get value from user input
-
         if (item) {
             $('#list-items').append("<li><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
 
@@ -66,7 +62,6 @@ $(document).ready(function () {
 
             $('#todo-list-item').val("");
         }
-
     });
 
     $(document).on('change', '.checkbox', function () {
@@ -76,9 +71,7 @@ $(document).ready(function () {
         else {
             $(this).attr('checked', 'checked');//if it doesn't have the attribute, then clicked it will check it
         }
-
         $(this).parent().toggleClass('completed');//add completed class to parent
-
         localStorage.setItem('listItems', $('#list-items').html());//update info in local storage
     });
 
@@ -93,16 +86,12 @@ $(document).ready(function () {
 
         var listings = groceryList.child(userName + "/items");
         // removeFromFB(currentListItem, listings);
-
-
         var getLocal = JSON.parse(localStorage.getItem('listArray'));
         console.log(getLocal);
         var location = getLocal.indexOf(currentListItem);
         var newItem = getLocal.splice(location, 1);
         localStorage.setItem('listArray', JSON.stringify(getLocal));
-
         groceryList.child(userName + "/items").set(getLocal);
-
     });
 
 });
