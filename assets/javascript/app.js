@@ -10,21 +10,12 @@ var config = {
     messagingSenderId: "74591335518"
 };
 firebase.initializeApp(config);
-
 var database = firebase.database();
-
 var connectionsRef = database.ref("/connections");
-
 var connectedRef = database.ref(".info/connected");
-
 var messaging = firebase.messaging();
-
-
 var groceryList = database.ref("/groceryList");
 // var list=groceryList.child(user.displayName);
-
-
-
 
 $('.pullChevron').on('click', function () {
     $('#sidebar').toggleClass('active');
@@ -159,23 +150,13 @@ $(document).on("click", '.signIn', function (e) {
                 }
 
             });
-
-
-
-
             // We load currently existing chant messages.
 
             // We save the Firebase Messaging Device token and enable notifications.
-
-
         } else { // User is signed out!
             // $('#profile').attr("src", profilePicUrl);
-
-
         }
     });
-
-
 })
 
 
@@ -206,8 +187,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 
         // We save the Firebase Messaging Device token and enable notifications.
-
-
 
     } else { // User is signed out!
         // $('#profile').attr("src", profilePicUrl);
