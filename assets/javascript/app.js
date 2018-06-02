@@ -279,22 +279,86 @@ $('input:radio[name=options]').change(function (e) {
 // }
 // );
 
-      //TODO-api random images to carousal
-      //TODO-add left side bar to carousal page
-      //TODO-add top navbar to all pages
-    //TODO-implement api search for recipes
-            //-add images to recipe page
-            //-add quick blurb of recipe into recipe card
-    //TODO-implement favorites for recipe
-    //TODO-toggle all on todolist-all
-            //-toggle favorites
-            //-toggle tbd
+//TODO-api random images to carousal
+//TODO-add left side bar to carousal page
+//TODO-add top navbar to all pages
+//TODO-implement api search for recipes
+//-add images to recipe page
+//-add quick blurb of recipe into recipe card
+//TODO-implement favorites for recipe
+//TODO-toggle all on todolist-all
+//-toggle favorites
+//-toggle tbd
 
-    //TODO-random jokes api on carousal page- top
-    //TODO-create same fire object to compare to todo list. if same item, reject
+//TODO-random jokes api on carousal page- top
+//TODO-create same fire object to compare to todo list. if same item, reject
 
-    //TODO-luxury- able to click recipe item and add to list
+//TODO-luxury- able to click recipe item and add to list
 
-    //TODO-calories,diet labels, nutrition label,health label,
+//TODO-calories,diet labels, nutrition label,health label,
 
 
+//////////inspire javascript///////////////////////////////////////////////////////////
+var carouselPinterestData = database.ref("pintData");
+
+function randomize() {
+    carouselPinterestData.on("value", function (snapshot) {
+        console.log(snapshot.val());
+        var recipeImages = snapshot.val();
+        var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        var chosen = [];
+        for (var i = 0; i < 20; i++) {
+            var index = Math.floor((Math.random() * numbers.length) + 1) - 1;
+            chosen.push(numbers[index]);
+            numbers.splice(index, 1);
+        }
+        // console.log(chosen);
+
+        var imgTags = document.getElementsByTagName('img');//get image array inside carousal
+        var imgMeta = document.getElementsByClassName('carousel-caption');//get meta section of all 4 images
+        var imgH3 = $(imgMeta).find('h3');//get array of h3 elements in meta section
+        var imgP = $(imgMeta).find('p');//get array of p elements in meta section
+        // console.log(imgH3);
+        // console.log(imgP);
+
+        console.log(imgH3[0].innerText = "test");
+
+        for (var i = 0; i < imgTags.length; i++) {
+            // console.log(chosen[i]);
+            imgTags[i].src = recipeImages[chosen[i]].image.original.url;
+            var test = recipeImages[chosen[i]].note;
+            if (test) {
+                imgH3[i].innerText = test;
+            }
+            else {
+                imgH3[i].innerText = recipeImages[chosen[i]].metadata.article['name'];
+            }
+
+        }
+    })
+}
+
+$(document).ready(function(){
+    randomize();
+});
+$(document).on("click", ".inspiredTitle", function () {
+    callPintData();
+    randomize();
+});
+
+function callPintData() {
+    queryURL = "https://api.pinterest.com/v1/boards/jessannkirby/recipes/pins/?access_token=AUeRMsyvE_RWpO5XHYSzOt9rOVoYFTRhtTgDtztE-aeLRMAsQAAAAAA&fields=id%2Clink%2Cnote%2Curl%2Cmetadata%2Cimage"
+
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        var pintDataLength = response.data.length;
+        var pintData = response.data;
+        carouselPinterestData.set(pintData);
+        //     // $('img').attr("src", response.data[3].image.original.url);
+    }
+    );
+}
