@@ -113,12 +113,15 @@ footer {
     font-weight: bold;
     font-family: 'Helvetica', 'Arial', sans-serif;
     /* border:1px solid grey; */
+    border-width:1px;  
+    border-style:inset;
 }
 
 .listToggleBtns{
     display:flex;
     justify-content: center;
     padding-top:1em;
+    padding-bottom:1em;
 }
 .btn.active.focus{
     outline: none !important;
@@ -376,8 +379,6 @@ color:#4c8cd6
 .inspiredTitle{
     text-align:center;
     cursor: pointer;
-    margin-left: 7em;
-    margin-right: 7em;
 }
 
 header {
