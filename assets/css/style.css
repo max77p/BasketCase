@@ -8,7 +8,7 @@ body{
 }
 
 .topNav{
-    border:1px solid black;
+    border:1px solid black;   
 }
 
 #sidebar {/*side bar dimensions*/
@@ -406,6 +406,10 @@ footer {
     padding-block-start: -25%;
 }
 
+.mainCarousel{
+max-height:33em;
+height:100%;
+}
 .imgMeta{
     font-size:1em;
 }
@@ -435,11 +439,18 @@ footer {
 }
 
 .item{
-    max-height:45em;
+    max-height:33em;
     height:100%;
 }
 
 .item img{
     height:100% !important;
 }
+
+@media screen and (min-width: 600px){
+    .mainCarousel, .item{
+        max-height:45em;
+    }
+
+    }
 
