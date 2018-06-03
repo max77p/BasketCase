@@ -11,6 +11,27 @@ body{
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3), 1px 0px 15px 2px rgba(0, 0, 0, 0.1);
     background-color: #f8f8f8;
 }
+.logoTop{
+    position: absolute;
+    top: .6em;
+    margin: 0 auto;
+    margin-left: 35%;
+    margin-right: 65%;
+    display: flex;
+}
+
+.logoImage{
+    height:1.5em;
+}
+.logoName{
+margin: 0;
+    line-height: 1;
+    font-family: 'Song Myung', serif;
+    font-size:3em;
+    display: flex;
+    height: 1em;
+    justify-content: center;
+}
 
 #sidebar {/*side bar dimensions*/
         min-width: 15.6em;
@@ -314,7 +335,9 @@ margin-right:2em;
 }
 
 #userAuth{/*for the sign in icon*/
-    float:right
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .manIcon{
     padding-right: .5em;
@@ -476,9 +499,9 @@ height:100%;
 
 body {
     /* background-color:#ffffff; */
-    background: linear-gradient( rgba(175, 175, 175, 0.2), rgba(175, 175, 175, 0.2) ), url(../images/backgroundLowRes.jpg);
+    /* background: linear-gradient( rgba(175, 175, 175, 0.2), rgba(175, 175, 175, 0.2) ), url(../images/backgroundLowRes.jpg);
     background-size: cover;
-    background-position: center;
+    background-position: center; */
 }
 
 /* body{
@@ -553,7 +576,7 @@ body {
 
 .mainCard {
     display: inline-block;
-    width: 33.3%;
+    width: 100%;
     justify-content: center;
     background: #fffbfb82
 }
@@ -592,12 +615,15 @@ h5 {
     height: 7em;
 }
 
-.rowGrid{
+/* .rowGrid{
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+} */
+
+.col-md-4{
+    /* width:100%; */
 }
 
 /******************************************/
-
