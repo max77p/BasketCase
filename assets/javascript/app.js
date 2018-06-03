@@ -367,9 +367,9 @@ function callPintData() {
 
 /////////////--------------Ananya javascript-----------------------------///////////////////////////////////////////
 
-$("button").on("keypress click", function myFunction() {
+$("#searchButton").on("click", function myFunction(event) {
 
-
+    event.preventDefault();
     //  Emptying out the container
     $('.grid').empty();
   
