@@ -180,7 +180,8 @@ footer {
     overflow:hidden;
     overflow-y:scroll;
     height:30em;
-    background: #fffbfb78; 
+    background: #ffffffab;
+    padding-top: 1em;
 }
 
 /* #list-items li{
@@ -382,6 +383,8 @@ border-bottom: 1px #e5e5e5 solid;
 padding: 0.625em;
 font-size: 1.3em;
 display: block;
+text-align: left;
+    margin-left: 2em;
 }
 #sidebar ul li{
 padding-top:2em;
