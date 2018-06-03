@@ -126,7 +126,8 @@ footer {
 .todoContainer{
     /* margin-top:5em; */
     
-    min-width: 50%;
+    max-width: 50em;
+    width:100%;
     /* height:20.6em; */
     padding:1em;
     padding-bottom:0;
@@ -236,6 +237,7 @@ form {
   .remove {
     float: right;
     cursor: pointer;
+    padding-right:1em;
   }
   
   .completed { text-decoration: line-through; }/*cross out if completed*/
