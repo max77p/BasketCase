@@ -103,8 +103,10 @@ footer {
 
 /******todo list**********************************************/
 .todoContainer{
-    /* margin-top:3em; */
+    /* margin-top:5em; */
+    
     min-width: 50%;
+    /* height:20.6em; */
     padding:1em;
     padding-bottom:0;
     /* max-width: 50em;
@@ -114,8 +116,8 @@ footer {
     font-weight: bold;
     font-family: 'Helvetica', 'Arial', sans-serif;
     /* border:1px solid grey; */
-    /* background-color: whitesmoke;
-    background: #fffbfb78; */
+    /* background-color: whitesmoke;*/
+    background: #fffbfb78; 
     
     
 }
@@ -157,9 +159,9 @@ footer {
     height:30em;
 }
 
-#list-items li{
+/* #list-items li{
     background: #fffbfbdb;
-}
+} */
 form {
     margin-top: 5%;
     border: 3px solid #3b3b3b;
@@ -593,5 +595,9 @@ h5 {
 .rowGrid{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
 }
+
+/******************************************/
+
