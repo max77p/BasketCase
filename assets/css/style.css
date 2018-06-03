@@ -21,13 +21,13 @@ body{
 }
 
 .logoImage{
-    height:1.5em;
+    height: 202%;
 }
 .logoName{
-margin: 0;
-    line-height: 1;
+    margin: 0;
+    line-height: 2.2;
     font-family: 'Song Myung', serif;
-    font-size:3em;
+    font-size: 200%;
     display: flex;
     height: 1em;
     justify-content: center;
