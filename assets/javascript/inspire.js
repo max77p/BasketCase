@@ -48,15 +48,9 @@ carouselPinterestData.on("value", function (snapshot) {
 })
 
 
-
-
-
 $(document).on("click", ".inspiredTitle", function () {
     callPintData();
 });
-
-
-
 
 // queryURL = "https://api.edamam.com/search?q=chicken&app_id=540719b1&app_key=2d98d59eaf4976edb2d1abd92540e167"
 
