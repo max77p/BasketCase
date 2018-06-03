@@ -9,7 +9,7 @@ body{
 }
 
 .topNav{
-    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3), 1px 0px 15px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 5px 1px rgba(0, 0, 0, 0.3), 1px 0px 15px 2px rgba(0, 0, 0, 0.1);
     background-color: #f8f8f8;
 }
 .logoTop{
@@ -592,8 +592,8 @@ body {
 .image{
     width: 100%;
     overflow: hidden;
-    padding: 1em;
-    border-radius: 1em;
+    /* padding: 1em;
+    border-radius: 1em; */
 }
 
 h5 {
@@ -621,6 +621,7 @@ h5 {
 .card-body {
     padding: 0;
     height: 7em;
+    background: #f8f8f8;
 }
 
 /* .rowGrid{
@@ -631,7 +632,11 @@ h5 {
 } */
 
 .col-md-4{
-    /* width:100%; */
+    /* height:40em; */
 }
 
 /******************************************/
+
+.vegeIcon,.peanutIcon,.sugarIcon{
+    height:2em;
+}
