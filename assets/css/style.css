@@ -452,7 +452,7 @@ footer {
 }
 
 .mainCarousel{
-height:45em;
+height:100%;
 }
 .imgMeta{
     font-size:1em;
@@ -465,6 +465,7 @@ height:45em;
 
 .carousel-caption{
     padding-bottom:0;
+    
 }
 .carousel-caption > p{
     font-size:.7em;
@@ -488,13 +489,14 @@ height:45em;
 }
 
 .item img{
-    /* height:100% !important; */
+    /* height:35em !important; */
 }
 
 @media screen and (min-width: 600px){
     .mainCarousel, .item{
         max-height:45em;
     }
+   
 
     }
 
