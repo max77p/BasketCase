@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var connectionsRef = database.ref("/connections");
 var connectedRef = database.ref(".info/connected");
-var messaging = firebase.messaging();
+// var messaging = firebase.messaging();
 var groceryList = database.ref("/groceryList");
 // var list=groceryList.child(user.displayName);
 
