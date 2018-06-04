@@ -209,6 +209,16 @@ form {
     font-weight: normal;
     padding-left: 0.625em;/*10px*/
     background: #ffffff6b;
+    text-transform:capitalize;
+  }
+
+  input[type="text"]:focus, input[type="text"]:active{
+      outline:0 !important;
+      /* border: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important; */
+  box-shadow: none !important;
+ 
   }
   
   .add {/*styling and position for button*/
@@ -405,7 +415,7 @@ color:#4c8cd6
 }
   
 
-/*----------Candice carousal styling-----------------few edits by Shan-----------------------------------------*/
+/*----------Candice carousal styling-----------------EDITED BY SHAN-----------------------------------------*/
 
  /*styling for main content, carousel and footer*/
 
@@ -503,7 +513,7 @@ box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, 0.3), 1px 0px 15px 2px rgba(0, 0, 0, 0
 
     }
 
-/*-----------------------------Anaya styling-----------------------------------------------------------------*/
+/*-----------------------------Anaya styling------------------------EDITED BY SHAN-----------------------------------------*/
 * {
     box-sizing: border-box;  
 }
@@ -634,7 +644,9 @@ font-weight:bold;
     padding: 0;
     /* margin-right: 10px; */
     padding-bottom: .5em;
+    
 }
+
 
 
 .mainCard {

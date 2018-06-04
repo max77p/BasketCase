@@ -36,8 +36,11 @@ $(document).ready(function () {
 
     $('.add-items').submit(function (event) {
         event.preventDefault();
-        var item = $('#todo-list-item').val();//get value from user input
+        var val = $('#todo-list-item').val();//get value from user input
+        val = val.charAt(0).toUpperCase() + val.substr(1);
+        var item=val;
 
+        $('#todo-list-item').val("");
         if (item) {
             $('#list-items').append("<li><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
 
@@ -56,10 +59,8 @@ $(document).ready(function () {
                 console.log(snapshot.val());
                 localStorage.setItem('listArray', JSON.stringify(snapshot.val()));//update local storage item array anytime change happens 
             });
-
-
-            $('#todo-list-item').val("");
         }
+    
     });
 
     $(document).on('change', '.checkbox', function () {
@@ -279,23 +280,23 @@ $('input:radio[name=options]').change(function (e) {
 // }
 // );
 
-//TODO-api random images to carousal
-//TODO-add left side bar to carousal page
-//TODO-add top navbar to all pages
-//TODO-implement api search for recipes
-//-add images to recipe page
-//-add quick blurb of recipe into recipe card
-//TODO-implement favorites for recipe
-//TODO-toggle all on todolist-all
-//-toggle favorites
-//-toggle tbd
+//TODO-api random images to carousal - done
+//TODO-add left side bar to carousal page - done
+//TODO-add top navbar to all pages - done
+//TODO-implement api search for recipes - done
+//-add images to recipe page - done
+//-add quick blurb of recipe into recipe card - done
+//TODO-implement favorites for recipe - done
+//TODO-toggle all on todolist-all - done
+//-toggle favorites 
+//-toggle tbd - done
 
-//TODO-random jokes api on carousal page- top
+//TODO-random jokes api on carousal page- top - CANCELLED
 //TODO-create same fire object to compare to todo list. if same item, reject
 
-//TODO-luxury- able to click recipe item and add to list
+//TODO-luxury- able to click recipe item and add to list - NEXT VERSION
 
-//TODO-calories,diet labels, nutrition label,health label,
+//TODO-calories,diet labels, nutrition label,health label, - first version is just health icons/label
 
 
 //////////inspire javascript///////////////////////////////////////////////////////////
@@ -376,7 +377,7 @@ $("#searchButton").on("click", function myFunction(event) {
     // Storing what is typed into the search bar
     var searchTerm = $("#searchForm").val();
     console.log(searchTerm);
-
+    $("#searchForm").val("");
     if (event.keyCode === 13 || event.type === 'click') {
         // Consturcting the query URL for the API
         var queryURL = "https://api.edamam.com/search?q=" + searchTerm + "&app_id=b0ffc540&app_key=a41b1a4d8560dbb27bbf0ef650ec9bf0";
