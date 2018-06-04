@@ -643,9 +643,16 @@ h5 {/*title for card body*/
 
 .mainNutritionDiv{  
     padding-left:.5em;
+    display: flex;
+    justify-content: space-between;
 }
 
-#favStar:hover,#favLink:hover{
+#favStar{
+    display: flex;
+    align-items: center;
+    padding-right:.5em;
+}
+#favStar:hover{
     cursor: pointer;
 }
 .favStarColor{

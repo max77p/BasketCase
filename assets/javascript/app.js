@@ -494,7 +494,8 @@ $(document).ready(function () {
             recipeBodyDiv.append(recipeTitle);
 
 
-            var nutritionDiv=$('<div class="mainNutritionDiv">')
+            var mainNutritionDiv=$('<div class="mainNutritionDiv">')
+            var nutritionDiv=$('<span class="insideNutrition">');
             //add nutrition info here
             var nutrition = response.hits[i].recipe.healthLabels;
             for (var j = 0; j < nutrition.length; j++) {
@@ -512,12 +513,14 @@ $(document).ready(function () {
                     var nutritionImg = $('<img class="sugarIcon" src="assets/images/health/lowsugar.png">');
                     nutritionDiv.append(nutritionImg);
                 }
-              
-                recipeBodyDiv.append(nutritionDiv);
+              mainNutritionDiv.append(nutritionDiv);
             }
                //add favorites
                var favStar = "<i class='far fa-star' data-imgLink='" + response.hits[i].recipe.url + "' data-Id='" + response.hits[i].recipe.label + "' id='favStar'</i>";//create favorites icon
-               nutritionDiv.append(favStar);
+           
+               mainNutritionDiv.append(favStar);
+               recipeBodyDiv.append(mainNutritionDiv);
+    
             
     
             // console.log(recipeDiv);
