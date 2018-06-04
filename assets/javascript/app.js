@@ -409,22 +409,31 @@ $("#searchButton").on("click", function myFunction(event) {
                 var recipeTitle = $("<h5>").text(response.hits[i].recipe.label).attr("class", "title").attr("data", response.hits[i].recipe.url);
                 recipeBodyDiv.append(recipeTitle);
 
+
+                var mainNutritionDiv = $('<div class="mainNutritionDiv">')
+                var nutritionDiv = $('<span class="insideNutrition">');
+                //add nutrition info here
                 var nutrition = response.hits[i].recipe.healthLabels;
                 for (var j = 0; j < nutrition.length; j++) {
                     // console.log(nutrition[i]);
                     if (nutrition[j] === "Vegetarian") {
                         var nutritionImg = $('<img class="vegeIcon" src="assets/images/health/vegetarian.png">');
-                        recipeBodyDiv.append(nutritionImg);
+                        nutritionDiv.append(nutritionImg);
                     }
-                    else if (nutrition[j] === "Peanut-Free") {
+                    if (nutrition[j] === "Peanut-Free") {
                         var nutritionImg = $('<img class="peanutIcon" src="assets/images/health/peanut-free.png">');
-                        recipeBodyDiv.append(nutritionImg);
+                        nutritionDiv.append(nutritionImg);
                     }
-                    else if (nutrition[j] === "Sugar-Conscious") {
+                    if (nutrition[j] === "Sugar-Conscious") {
                         var nutritionImg = $('<img class="sugarIcon" src="assets/images/health/lowsugar.svg>');
-                        recipeBodyDiv.append(nutritionImg);
+                        nutritionDiv.append(nutritionImg);
                     }
+                    mainNutritionDiv.append(nutritionDiv);
                 }
+                //add favorites
+                var favStar = "<i class='fas fa-star' data-imgLink='" + response.hits[i].recipe.url + "' data-Id='" + response.hits[i].recipe.label + "' id='favStar'</i>";//create favorites icon
+                mainNutritionDiv.append(favStar);
+                recipeBodyDiv.append(mainNutritionDiv);
 
                 // console.log(recipeDiv);
                 $(".grid").append(recipeDiv);
@@ -494,13 +503,13 @@ $(document).ready(function () {
             recipeBodyDiv.append(recipeTitle);
 
 
-            var mainNutritionDiv=$('<div class="mainNutritionDiv">')
-            var nutritionDiv=$('<span class="insideNutrition">');
+            var mainNutritionDiv = $('<div class="mainNutritionDiv">')
+            var nutritionDiv = $('<span class="insideNutrition">');
             //add nutrition info here
             var nutrition = response.hits[i].recipe.healthLabels;
             for (var j = 0; j < nutrition.length; j++) {
                 // console.log(nutrition[i]);
-                
+
                 if (nutrition[j] === "Vegetarian") {
                     var nutritionImg = $('<img class="vegeIcon" src="assets/images/health/vegetarian.png">');
                     nutritionDiv.append(nutritionImg);
@@ -513,16 +522,16 @@ $(document).ready(function () {
                     var nutritionImg = $('<img class="sugarIcon" src="assets/images/health/lowsugar.png">');
                     nutritionDiv.append(nutritionImg);
                 }
-              mainNutritionDiv.append(nutritionDiv);
+                mainNutritionDiv.append(nutritionDiv);
             }
-               //add favorites
-               var favStar = "<i class='far fa-star' data-imgLink='" + response.hits[i].recipe.url + "' data-Id='" + response.hits[i].recipe.label + "' id='favStar'</i>";//create favorites icon
-           
-               mainNutritionDiv.append(favStar);
-               recipeBodyDiv.append(mainNutritionDiv);
-    
-            
-    
+            //add favorites
+            var favStar = "<i class='fas fa-star' data-imgLink='" + response.hits[i].recipe.url + "' data-Id='" + response.hits[i].recipe.label + "' id='favStar'</i>";//create favorites icon
+
+            mainNutritionDiv.append(favStar);
+            recipeBodyDiv.append(mainNutritionDiv);
+
+
+
             // console.log(recipeDiv);
             $(".grid").append(recipeDiv);
 

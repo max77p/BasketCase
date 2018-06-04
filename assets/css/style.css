@@ -531,8 +531,8 @@ body {
 
 #searchBar {
    border-style: none;
-    font-family: 'Poppins', sans-serif;
-    background-color: lightgray;
+    /* font-family: 'Poppins', sans-serif; */
+    background-color: #b3b2b2fc;
     opacity: 0.5;
     border-radius: 2em;
     padding: 10px;
@@ -547,19 +547,52 @@ body {
     padding-top: 0.3125em;
     padding-bottom: 0.3125em;
     border-style: none;
-    font-family: 'Poppins', sans-serif;
-    background-color: lightgray;
+    /* font-family: 'Poppins', sans-serif; */
+    background-color: #b3b2b2fc;
     border-radius: 0.15em;
 }
 
 #searchForm, #searchButton {
     padding: 0;
     border-style: none;
-    font-family: 'Poppins', sans-serif;
-    background-color: lightgray;
-
+    /* font-family: 'Poppins', sans-serif; */
+    background-color: #b3b2b2fc;
+color:black;
+font-weight:bold;
 }
 
+
+ @media (min-width: 300px) and(max-width:405px){
+        #searchBar {
+            width: 96%;
+            margin: 0 auto;
+            margin-right: 8em;
+        }
+ }
+
+ @media (min-width: 406px){
+    #searchBar {
+        width: 27em;
+        margin: 0 auto;
+        /* margin-right: 8em; */
+    }
+}
+
+@media (min-width: 992px){
+    #searchBar {
+        width: 55em;
+        margin: 0 auto;
+        /* margin-right: 8em; */
+    }
+}
+
+@media (min-width: 1200px){
+    #searchBar {
+        width: 100%;
+        margin: 0 auto;
+        /* margin-right: 8em; */
+    }
+}
 
 #searchIcon{
     margin-right: 1em;
@@ -574,6 +607,7 @@ body {
     width: auto;
     padding: 0;
     /* margin-right: 10px; */
+    padding-bottom: .5em;
 }
 
 
@@ -651,10 +685,11 @@ h5 {/*title for card body*/
     display: flex;
     align-items: center;
     padding-right:.5em;
+
 }
 #favStar:hover{
     cursor: pointer;
 }
 .favStarColor{
-    color:yellow;
+    color:#9bbf42;
     }
