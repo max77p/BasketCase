@@ -532,7 +532,7 @@ body {
 #searchBar {
     /* width: 100%; */
     border-style: none;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     background-color: lightgray;
     /* opacity: 0.5; */
     border-radius: 2em;
@@ -543,13 +543,13 @@ body {
     z-index: 1;
     background: linear-gradient(to left, rgba(175, 175, 175, 0.13), rgba(230, 230, 230, 0.71) );
 }
-
+\
 
 #searchIcon, #searchInput {
     padding-top: 0.3125em;
     padding-bottom: 0.3125em;
     border-style: none;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     background-color: lightgray;
     border-radius: 0.15em;
 }
@@ -557,7 +557,7 @@ body {
 #searchForm, #searchButton {
     padding: 0;
     border-style: none;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     /* background-color: lightgray; */
     background: linear-gradient(to left, rgba(175, 175, 175, 0.24), rgba(230, 230, 230, 0.53) );
 }
@@ -596,13 +596,13 @@ body {
     border-radius: 1em; */
 }
 
-h5 {
+h5 {/*title for card body*/
     margin: 0 auto;
     text-align: center;
     font-size: 25;
     font-weight: bold;
-    font-family: monospace;
-    padding: 1em;
+    /* font-family: monospace; */
+    height:5em;
     color: black;
 }
 
@@ -638,5 +638,9 @@ h5 {
 /******************************************/
 
 .vegeIcon,.peanutIcon,.sugarIcon{
-    height:2em;
+    height:1.3em;
+}
+
+.title{
+    
 }

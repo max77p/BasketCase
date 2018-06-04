@@ -493,23 +493,27 @@ $(document).ready(function () {
             var recipeTitle = $("<h5>").text(response.hits[i].recipe.label).attr("class", "title").attr("data", response.hits[i].recipe.url);;
             recipeBodyDiv.append(recipeTitle);
 
+            var nutritionDiv=$('<div class="mainNutritionDiv">')
             //add nutrition info here
             var nutrition = response.hits[i].recipe.healthLabels;
             for (var j = 0; j < nutrition.length; j++) {
                 // console.log(nutrition[i]);
+                
                 if (nutrition[j] === "Vegetarian") {
                     var nutritionImg = $('<img class="vegeIcon" src="assets/images/health/vegetarian.png">');
-                    recipeBodyDiv.append(nutritionImg);
+                    nutritionDiv.append(nutritionImg);
                 }
-                else if (nutrition[j] === "Peanut-Free") {
+                if (nutrition[j] === "Peanut-Free") {
                     var nutritionImg = $('<img class="peanutIcon" src="assets/images/health/peanut-free.png">');
-                    recipeBodyDiv.append(nutritionImg);
+                    nutritionDiv.append(nutritionImg);
                 }
-                else if (nutrition[j] === "Sugar-Conscious") {
+                if (nutrition[j] === "Sugar-Conscious") {
                     var nutritionImg = $('<img class="sugarIcon" src="assets/images/health/lowsugar.png">');
-                    recipeBodyDiv.append(nutritionImg);
+                    nutritionDiv.append(nutritionImg);
                 }
+                recipeBodyDiv.append(nutritionDiv);
             }
+            
 
             // console.log(recipeDiv);
             $(".grid").append(recipeDiv);
