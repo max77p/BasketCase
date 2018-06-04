@@ -1,5 +1,3 @@
-
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCgKPddkgj3RhPS1B2Hw_DihvXgZBbxxiE",
@@ -19,8 +17,8 @@ var groceryList = database.ref("/groceryList");
 
 $('.pullChevron').on('click', function () {
     $('#sidebar').toggleClass('active');
-
 })
+
 $(document).click(function (e) {
     var sidebar = $("#sidebar, .pullChevron");
     console.log(sidebar);
