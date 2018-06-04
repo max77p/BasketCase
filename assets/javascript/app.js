@@ -38,7 +38,7 @@ $(document).ready(function () {
         event.preventDefault();
         var val = $('#todo-list-item').val();//get value from user input
         val = val.charAt(0).toUpperCase() + val.substr(1);
-        var item=val;
+        var item = val;
 
         $('#todo-list-item').val("");
         if (item) {
@@ -59,10 +59,19 @@ $(document).ready(function () {
                 console.log(snapshot.val());
                 localStorage.setItem('listArray', JSON.stringify(snapshot.val()));//update local storage item array anytime change happens 
             });
+
+            showtoOthers(item,userName);
+
         }
-    
+
     });
 
+    function showtoOthers(elItem,elName) {
+        groceryList.child(elName + "/items").on("value", function (snapshot) {
+            console.log(snapshot.val());
+
+        });
+    }
     $(document).on('change', '.checkbox', function () {
         if ($(this).attr('checked')) {//if it has checked then clicking it will remove the checked
             $(this).removeAttr('checked');
@@ -265,20 +274,6 @@ $('input:radio[name=options]').change(function (e) {
 });
 
 
-// queryURL = "https://api.edamam.com/search?q=chicken&app_id=540719b1&app_key=2d98d59eaf4976edb2d1abd92540e167"
-
-
-
-// $.ajax({
-//     url: queryURL,
-//     method: "GET"
-// }).then(function (response) {
-//     console.log(response);
-//     console.log(response.hits[0].recipe.image);
-//     var testimg = response.hits[0].recipe.image;
-//     $('.card-img-top').attr("src",testimg);
-// }
-// );
 
 //TODO-api random images to carousal - done
 //TODO-add left side bar to carousal page - done
@@ -482,9 +477,9 @@ $(document).ready(function () {
     }).then(function (response) {
         // For loop going through for 9 recipes
         for (var i = 0; i < 10; i++) {
-            console.log(response);
+            // console.log(response);
             // // Getting the image from the API
-            console.log(response.hits[i].recipe.url);
+            // console.log(response.hits[i].recipe.url);
 
 
             // Creating the big square for the grid (main)
