@@ -671,6 +671,7 @@ h5 {/*title for card body*/
     font-weight: bold;
     /* font-family: monospace; */
     height:4.5em;
+    padding-top:1em;
     color:#322b21;
     padding-left:.5em;
 }

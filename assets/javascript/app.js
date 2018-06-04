@@ -296,7 +296,7 @@ $('input:radio[name=options]').change(function (e) {
 
 //TODO-luxury- able to click recipe item and add to list - NEXT VERSION
 
-//TODO-calories,diet labels, nutrition label,health label, - first version is just health icons/label
+//TODO-calories,diet labels, nutrition label,health label, - first version is just health icons/label - done
 
 
 //////////inspire javascript///////////////////////////////////////////////////////////
