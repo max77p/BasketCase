@@ -536,6 +536,8 @@ $(document).ready(function () {
             // console.log(recipeDiv);
             $(".grid").append(recipeDiv);
 
+            keepFav();
+
         }
 
         // Takes you to the recipe url webpage
@@ -587,6 +589,18 @@ function favs(elId, elLink) {
 }
 
 
+function keepFav(el) {//check which ones were saved as favorites in local storage and repopulate
+    var temp = document.getElementsByClassName("fa-star");
+    //  console.log(temp);
+    // console.log(temp.length);
+    for (var i = 0; i < temp.length; i++) {
+        if ($(temp[i]).attr("data-Id") in localStorage) {
+            // console.log("match");
+            $(temp[i]).addClass("favStarColor");
+
+        }
+    }
+}
 
 
 
