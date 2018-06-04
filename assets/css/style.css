@@ -41,6 +41,7 @@ body{
         margin-left:-15.6em;
         position:absolute;
         z-index:10;
+        top: 0;
 }
 
 .menuItems {/*contains the menu items on side bar*/
@@ -58,6 +59,7 @@ body{
     position:absolute;
     padding:1em;
     z-index:1;
+    cursor: pointer;
 }
 .pullChevron{/*dynamically align chevron to center using flexbox*/
    font-size:2em;
@@ -444,6 +446,10 @@ color:#4c8cd6
 
 #myCarousel.carousel.slide {
     height: 100%
+}
+
+.imageCar{
+    cursor: pointer;
 }
 
 footer {

@@ -59,19 +59,10 @@ $(document).ready(function () {
                 console.log(snapshot.val());
                 localStorage.setItem('listArray', JSON.stringify(snapshot.val()));//update local storage item array anytime change happens 
             });
-
-            showtoOthers(item,userName);
-
         }
-
     });
 
-    function showtoOthers(elItem,elName) {
-        groceryList.child(elName + "/items").on("value", function (snapshot) {
-            console.log(snapshot.val());
 
-        });
-    }
     $(document).on('change', '.checkbox', function () {
         if ($(this).attr('checked')) {//if it has checked then clicking it will remove the checked
             $(this).removeAttr('checked');
@@ -318,12 +309,17 @@ function randomize() {
         // console.log(imgH3);
         // console.log(imgP);
 
-        console.log(imgH3[0].innerText = "test");
+        // var imgLink=document.getElementsByClassName('imgLink');
+        // console.log(imgLink);
+
+        // console.log(imgH3[0].innerText = "test");
 
         for (var i = 0; i < imgTags.length; i++) {
             // console.log(chosen[i]);
             imgTags[i].src = recipeImages[chosen[i]].image.original.url;
+           imgTags[i].setAttribute("data-link",recipeImages[chosen[i]].url);
             var test = recipeImages[chosen[i]].note;
+            console.log(test);
             if (test) {
                 imgH3[i].innerText = test;
             }
@@ -334,6 +330,11 @@ function randomize() {
         }
     })
 }
+
+$(document).on('click', '.imageCar', function () {
+    window.open($(this).attr('data-link'));
+    console.log(this);
+});
 
 $(document).ready(function () {
     randomize();
