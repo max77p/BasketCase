@@ -530,26 +530,24 @@ body {
 }
 
 #searchBar {
-    /* width: 100%; */
-    border-style: none;
-    /* font-family: 'Poppins', sans-serif; */
+   border-style: none;
+    font-family: 'Poppins', sans-serif;
     background-color: lightgray;
-    /* opacity: 0.5; */
+    opacity: 0.5;
     border-radius: 2em;
     padding: 10px;
     overflow: hidden;
     display: flex;
     height: 4em;
     z-index: 1;
-    background: linear-gradient(to left, rgba(175, 175, 175, 0.13), rgba(230, 230, 230, 0.71) );
+    margin-right: 1em;
 }
-\
 
 #searchIcon, #searchInput {
     padding-top: 0.3125em;
     padding-bottom: 0.3125em;
     border-style: none;
-    /* font-family: 'Poppins', sans-serif; */
+    font-family: 'Poppins', sans-serif;
     background-color: lightgray;
     border-radius: 0.15em;
 }
@@ -557,28 +555,25 @@ body {
 #searchForm, #searchButton {
     padding: 0;
     border-style: none;
-    /* font-family: 'Poppins', sans-serif; */
-    /* background-color: lightgray; */
-    background: linear-gradient(to left, rgba(175, 175, 175, 0.24), rgba(230, 230, 230, 0.53) );
-}
-#searchForm{
-    width: 100%;
-    background: #fffbfb;
+    font-family: 'Poppins', sans-serif;
+    background-color: lightgray;
+
 }
 
 
-/* #searchIcon{
+#searchIcon{
     margin-right: 1em;
     margin-left: 1em;
     width: 0.2em;
     height: auto;
-} */
+}
 
-#searchPng {
-    font-size: 3em;
+
+#searchPNG {
+    height: 50px;
+    width: auto;
     padding: 0;
     /* margin-right: 10px; */
-    background: linear-gradient(to left, rgba(175, 175, 175, 0.24), rgba(230, 230, 230, 0.53) );
 }
 
 
@@ -598,12 +593,13 @@ body {
 
 h5 {/*title for card body*/
     margin: 0 auto;
-    text-align: center;
+    /* text-align: center; */
     font-size: 25;
     font-weight: bold;
     /* font-family: monospace; */
-    height:5em;
-    color: black;
+    height:4.5em;
+    color:#322b21;
+    padding-left:.5em;
 }
 
 .grid {
@@ -624,15 +620,19 @@ h5 {/*title for card body*/
     background: #f8f8f8;
 }
 
-/* .rowGrid{
+.rowGrid{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    padding:1em;
     flex-wrap: wrap;
-} */
+    justify-content: center;
+} 
 
 .col-md-4{
-    /* height:40em; */
+    width:26em;
+    padding:0;
+    margin-right:1em;
+    margin-bottom:1em;
+    box-shadow: -1px 0px 4px 3px rgba(51, 51, 51, 0.72), 1px 0px 9px 7px rgba(0, 0, 0, 0.2);
 }
 
 /******************************************/
@@ -641,6 +641,13 @@ h5 {/*title for card body*/
     height:1.3em;
 }
 
-.title{
-    
+.mainNutritionDiv{  
+    padding-left:.5em;
 }
+
+#favStar:hover,#favLink:hover{
+    cursor: pointer;
+}
+.favStarColor{
+    color:yellow;
+    }

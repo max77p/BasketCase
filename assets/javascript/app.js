@@ -493,6 +493,7 @@ $(document).ready(function () {
             var recipeTitle = $("<h5>").text(response.hits[i].recipe.label).attr("class", "title").attr("data", response.hits[i].recipe.url);;
             recipeBodyDiv.append(recipeTitle);
 
+
             var nutritionDiv=$('<div class="mainNutritionDiv">')
             //add nutrition info here
             var nutrition = response.hits[i].recipe.healthLabels;
@@ -511,16 +512,16 @@ $(document).ready(function () {
                     var nutritionImg = $('<img class="sugarIcon" src="assets/images/health/lowsugar.png">');
                     nutritionDiv.append(nutritionImg);
                 }
+              
                 recipeBodyDiv.append(nutritionDiv);
             }
+               //add favorites
+               var favStar = "<i class='far fa-star' data-imgLink='" + response.hits[i].recipe.url + "' data-Id='" + response.hits[i].recipe.label + "' id='favStar'</i>";//create favorites icon
+               nutritionDiv.append(favStar);
             
-
+    
             // console.log(recipeDiv);
             $(".grid").append(recipeDiv);
-
-
-
-
 
         }
 
@@ -536,10 +537,42 @@ $(document).ready(function () {
             console.log(this);
         })
 
-
     });
 
 })
+
+
+
+var favorite;
+var favArray = [];
+var keyName = 1;
+$(document).on("click", '#favStar', function () {
+    var link = $(this).attr("data-imgLink");
+    var id = $(this).attr("data-Id");
+    $(this).toggleClass("favStarColor");
+
+    if ($(this).hasClass("favStarColor")) {
+        favorite = true;
+        //console.log(link);
+    }
+    else {
+        //favorites(link)
+        favorite = false;
+    }
+    favs(id, link);
+});
+
+//localStorage.clear();
+
+function favs(elId, elLink) {
+    if (favorite) {
+        localStorage.setItem(elId, elLink);
+    }
+    else {
+        localStorage.removeItem(elId, elLink);
+    }
+}
+
 
 
 
