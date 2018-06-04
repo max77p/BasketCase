@@ -208,6 +208,7 @@ form {
     font-size: 1.125em;/*18px*/
     font-weight: normal;
     padding-left: 0.625em;/*10px*/
+    background: #ffffff6b;
   }
   
   .add {/*styling and position for button*/
@@ -545,6 +546,21 @@ body {
     margin-right: 1em;
 }
 
+#listBar{
+    border-style: none;
+    /* font-family: 'Poppins', sans-serif; */
+    background: #ffffffab;
+    /* opacity: 0.5; */
+    border-radius: 2em;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    height: 4em;
+    z-index: 1;
+    margin-right: 1em;
+
+}
+
 #searchIcon, #searchInput {
     padding-top: 0.3125em;
     padding-bottom: 0.3125em;
@@ -559,6 +575,14 @@ body {
     border-style: none;
     /* font-family: 'Poppins', sans-serif; */
     background-color: #b3b2b2fc;
+color:black;
+font-weight:bold;
+}
+#listForm, #listButton {
+    padding: 0;
+    border-style: none;
+    /* font-family: 'Poppins', sans-serif; */
+    background: #ffffff00;
 color:black;
 font-weight:bold;
 }
