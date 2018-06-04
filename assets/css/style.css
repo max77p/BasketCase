@@ -647,6 +647,7 @@ font-weight:bold;
 .image{
     width: 100%;
     overflow: hidden;
+    height:22em;
     /* padding: 1em;
     border-radius: 1em; */
 }
