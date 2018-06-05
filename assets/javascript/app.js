@@ -272,14 +272,10 @@ $('input:radio[name=options]').change(function (e) {
 //-add quick blurb of recipe into recipe card - done
 //TODO-implement favorites for recipe - done
 //TODO-toggle all on todolist-all - done
-//-toggle favorites 
+//-toggle favorites - TBD?
 //-toggle tbd - done
-
-//TODO-random jokes api on carousal page- top - CANCELLED
-//TODO-create same fire object to compare to todo list. if same item, reject
-
-//TODO-luxury- able to click recipe item and add to list - NEXT VERSION
-
+//TODO-random jokes api on carousal page- top - CANCELLED?
+//TODO-luxury- able to click recipe item and add to list - NEXT VERSION?
 //TODO-calories,diet labels, nutrition label,health label, - first version is just health icons/label - done
 
 
@@ -311,7 +307,6 @@ function randomize() {
         // console.log(imgLink);
 
         // console.log(imgH3[0].innerText = "test");
-
         for (var i = 0; i < imgTags.length; i++) {
             // console.log(chosen[i]);
             imgTags[i].src = recipeImages[chosen[i]].image.original.url;
