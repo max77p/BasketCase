@@ -76,11 +76,12 @@ $(document).ready(function () {
         $(this).parent().remove();//remove element that was clicked
         var currentListItem = $(this).data('name');
         console.log(currentListItem);
-        var user = firebase.auth().currentUser;
-        var userName = user.displayName
-
         localStorage.setItem('listItems', $('#list-items').html());//update local storage with updated html
 
+        var user = firebase.auth().currentUser;
+        var userName = user.displayName
+        
+        
         var listings = groceryList.child(userName + "/items");
         listings.once("value").then(function (snapshot) {//when remove is clicked remove item from firebase
             snapshot.forEach(function (childSnapshot) {
