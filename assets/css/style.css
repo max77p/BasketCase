@@ -581,7 +581,7 @@ body {
     display: flex;
     height: 4em;
     z-index: 1;
-    margin-right: 1em;
+    /* margin-right: 1em; */
 
 }
 

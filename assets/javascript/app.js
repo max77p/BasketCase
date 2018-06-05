@@ -57,11 +57,16 @@ $(document).ready(function () {
                 console.log(snapshot.val());
                 localStorage.setItem('listArray', JSON.stringify(snapshot.val()));//update local storage item array anytime change happens 
             });
+
+            var getLocalHtml = localStorage.getItem('listItems')
+            groceryList.child(userName + "/itemsHtml").set(getLocalHtml);
         }
     });
 
 
     $(document).on('change', '.checkbox', function () {
+        var user = firebase.auth().currentUser;
+            var userName = user.displayName;
         if ($(this).attr('checked')) {//if it has checked then clicking it will remove the checked
             $(this).removeAttr('checked');
         }
@@ -70,6 +75,8 @@ $(document).ready(function () {
         }
         $(this).parent().toggleClass('completed');//add completed class to parent
         localStorage.setItem('listItems', $('#list-items').html());//update info in local storage
+        var getLocalHtml = localStorage.getItem('listItems')
+        groceryList.child(userName + "/itemsHtml").set(getLocalHtml);
     });
 
     $(document).on('click', '.remove', function () {
@@ -80,7 +87,8 @@ $(document).ready(function () {
 
         var user = firebase.auth().currentUser;
         var userName = user.displayName
-
+        var getLocalHtml = localStorage.getItem('listItems')
+        groceryList.child(userName + "/itemsHtml").set(getLocalHtml);
 
         var listings = groceryList.child(userName + "/items");
         listings.once("value").then(function (snapshot) {//when remove is clicked remove item from firebase
@@ -97,9 +105,9 @@ $(document).ready(function () {
     //remove favorites from favorite toggled button- remove from firebase and remove from local storage
     $(document).on('click', '.fav2', function () {
         var user3 = firebase.auth().currentUser;
-            var userName = user3.displayName;
+        var userName = user3.displayName;
         $(this).parent().remove();//remove element that was clicked
-        var currentFav= $(this).data('fav2');
+        var currentFav = $(this).data('fav2');
         // console.log(currentFav);
         groceryList.child(userName + "/favs" + "/" + currentFav).remove();
 
@@ -139,7 +147,7 @@ $(document).on("click", '.signIn', function (e) {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) { // User is signed in!
-            localStorage.clear();//clear localstorage when user logs in
+            // localStorage.clear();//clear localstorage when user logs in
 
             // Get profile pic and user's name from the Firebase user object.
             var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
@@ -150,27 +158,27 @@ $(document).on("click", '.signIn', function (e) {
 
             // Hide sign-in button.
 
-            groceryList.child(userName + "/items").on("value", function (snapshot) {
-                console.log(snapshot.val());
+            // groceryList.child(userName + "/items").on("value", function (snapshot) {
+            //     console.log(snapshot.val());
 
-                localStorage.setItem('listArray', JSON.stringify(snapshot.val()));
+            //     localStorage.setItem('listArray', JSON.stringify(snapshot.val()));
 
-            });
-            groceryList.child(userName + "/itemsHtml").on("value", function (snapshot) {
-                console.log(snapshot.val());
-                if (snapshot.val() != null) {
-                    localStorage.setItem('listItems', snapshot.val());
-                    $('#list-items').html(localStorage.getItem('listItems'));
-                }
+            // });
+            // groceryList.child(userName + "/itemsHtml").on("value", function (snapshot) {
+            //     console.log(snapshot.val());
+            //     if (snapshot.val() != null) {
+            //         localStorage.setItem('listItems', snapshot.val());
+            //         $('#list-items').html(localStorage.getItem('listItems'));
+            //     }
 
-            });
-            groceryList.child(userName + "/favs").on("child_added", function (snapshot) {
-                console.log(snapshot.val());
-                if (snapshot.val() != null) {
-                    localStorage.setItem(snapshot.key, snapshot.val());
-                }
+            // });
+            // groceryList.child(userName + "/favs").on("child_added", function (snapshot) {
+            //     console.log(snapshot.val());
+            //     if (snapshot.val() != null) {
+            //         localStorage.setItem(snapshot.key, snapshot.val());
+            //     }
 
-            });
+            // });
 
             // We save the Firebase Messaging Device token and enable notifications.
         } else { // User is signed out!
@@ -182,8 +190,9 @@ $(document).on("click", '.signIn', function (e) {
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) { // User is signed in!
-        $('#list-items').show();
-        $('#fav-items').empty();
+        // $('#list-items').show();
+        // $('#fav-items').empty();
+        localStorage.clear();
         // Get profile pic and user's name from the Firebase user object.
         var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
         var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
@@ -205,7 +214,31 @@ firebase.auth().onAuthStateChanged(function (user) {
         // Hide sign-in button.
 
         // We load currently existing chant messages.
+        groceryList.child(userName + "/items").on("value", function (snapshot) {
+            console.log(snapshot.val());
 
+            localStorage.setItem('listArray', JSON.stringify(snapshot.val()));
+
+        });
+
+
+        groceryList.child(userName + "/itemsHtml").on("value", function (snapshot) {
+            console.log(snapshot.val());
+            if (snapshot.val() != null) {
+                localStorage.setItem('listItems', snapshot.val());
+                $('#list-items').html(localStorage.getItem('listItems'));
+            }
+
+        });
+        groceryList.child(userName + "/favs").on("child_added", function (snapshot) {
+            console.log(snapshot.val());
+            if (snapshot.val() != null) {
+                localStorage.setItem(snapshot.key, snapshot.val());
+            }
+            keepFav(snapshot.key);
+        });
+
+        
 
         // We save the Firebase Messaging Device token and enable notifications.
 
@@ -275,7 +308,8 @@ $('input:radio[name=options]').change(function (e) {
     var listitems = get[0].children;
 
     if (radioBtn === "option2") {//for when user clicks completed button, then show only completed
-    $('#fav-items').empty();
+        $('#fav-items').empty();
+        $('#listBar').hide();
         $('.listLi:not(.completed)').hide();
         console.log(listitems[0].className);
         console.log(get[0].children)
@@ -283,15 +317,17 @@ $('input:radio[name=options]').change(function (e) {
     else if (radioBtn === "option1") {
         $('#fav-items').empty();
         $('.listLi').show();
+        $('#listBar').show();
     }
     else if (radioBtn === "option3") {
         $('.listLi').hide();
+        $('#listBar').hide();
         var user = firebase.auth().currentUser;
         var userName = user.displayName;
         var listings = groceryList.child(userName + "/favs");
         listings.on("child_added", function (snapshot) {
-            console.log(snapshot.val());           
-            var favorite = $('#fav-items').append("<li class='listFav'><a class='favs' data-Fav='" + snapshot.val() + "'>" + snapshot.key + "</a><a class='fav2' data-Fav2='"+snapshot.key+"'>x</a><hr></li>");//sets checkbox and remove dynamically
+            console.log(snapshot.val());
+            var favorite = $('#fav-items').append("<li class='listFav'><a class='favs' data-Fav='" + snapshot.val() + "'>" + snapshot.key + "</a><a class='fav2' data-Fav2='" + snapshot.key + "'>x</a><hr></li>");//sets checkbox and remove dynamically
             $('#list-items').append(favorite);
         });
         // $('#list-items').append("<li class='listLi'><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
