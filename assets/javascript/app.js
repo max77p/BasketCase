@@ -40,7 +40,7 @@ $(document).ready(function () {
 
         $('#todo-list-item').val("");
         if (item) {
-            $('#list-items').append("<li><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
+            $('#list-items').append("<li class='listLi'><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
 
 
             localStorage.setItem('listItems', $('#list-items').html());//add html data to local storage
@@ -80,8 +80,8 @@ $(document).ready(function () {
 
         var user = firebase.auth().currentUser;
         var userName = user.displayName
-        
-        
+
+
         var listings = groceryList.child(userName + "/items");
         listings.once("value").then(function (snapshot) {//when remove is clicked remove item from firebase
             snapshot.forEach(function (childSnapshot) {
@@ -254,15 +254,34 @@ $('input:radio[name=options]').change(function (e) {
     var listitems = get[0].children;
 
     if (radioBtn === "option2") {//for when user clicks completed button, then show only completed
+    $('#fav-items').empty();
         $('li:not(.completed)').hide();
         console.log(listitems[0].className);
         console.log(get[0].children)
     }
     else if (radioBtn === "option1") {
-        $('li').show();
+        $('#fav-items').empty();
+        $('.listLi').show();
+    }
+    else if (radioBtn === "option3") {
+        $('.listLi').hide();
+        var user = firebase.auth().currentUser;
+        var userName = user.displayName;
+        var listings = groceryList.child(userName + "/favs");
+        listings.on("child_added", function (snapshot) {
+            console.log(snapshot.val());           
+            var favorite = $('#fav-items').append("<li class='listFav'><a class='favs' data-Fav='" + snapshot.val() + "'>" + snapshot.key + "</a><hr></li>");//sets checkbox and remove dynamically
+            $('#list-items').append(favorite);
+        });
+        // $('#list-items').append("<li><a class='favs'>""</a><hr></li>");//sets checkbox and remove dynamically
     }
 });
 
+
+$(document).on('click', '.favs', function () {
+    window.open($(this).attr('data-fav'));
+    console.log(this);
+});
 
 
 //TODO-api random images to carousal - done
@@ -311,7 +330,7 @@ function randomize() {
         for (var i = 0; i < imgTags.length; i++) {
             // console.log(chosen[i]);
             imgTags[i].src = recipeImages[chosen[i]].image.original.url;
-           imgTags[i].setAttribute("data-link",recipeImages[chosen[i]].url);
+            imgTags[i].setAttribute("data-link", recipeImages[chosen[i]].url);
             var test = recipeImages[chosen[i]].note;
             console.log(test);
             if (test) {
@@ -569,16 +588,17 @@ $(document).on("click", '#favStar', function () {
 //localStorage.clear();
 
 function favs(elId, elLink) {
+    var user = firebase.auth().currentUser;
+    var userName = user.displayName;
     if (favorite) {
-        localStorage.setItem('list-a',(elId, elLink));
+        localStorage.setItem(elId, elLink);
+        groceryList.child(userName + "/favs" + "/" + elId).set(elLink);
     }
     else {
         localStorage.removeItem(elId, elLink);
+        groceryList.child(userName + "/favs" + "/" + elId).remove();
     }
-    var user = firebase.auth().currentUser;
-    var userName = user.displayName;
-    // groceryList.child(userName + "/favs").push();//push grocery items to firebase
-    //         var listings = groceryList.child(userName + "/favs");
+
 }
 
 

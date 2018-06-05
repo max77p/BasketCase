@@ -187,6 +187,14 @@ footer {
     box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, 0.3), 1px 0px 15px 2px rgba(0, 0, 0, 0.45);
 }
 
+.favs{
+    padding-left:1em;
+    cursor: pointer;
+}
+
+.favs:hover{
+    color:green;
+}
 /* #list-items li{
     background: #fffbfbdb;
 } */
