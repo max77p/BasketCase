@@ -94,6 +94,19 @@ $(document).ready(function () {
         });
     });
 
+    //remove favorites from favorite toggled button- remove from firebase and remove from local storage
+    $(document).on('click', '.fav2', function () {
+        var user3 = firebase.auth().currentUser;
+            var userName = user3.displayName;
+        $(this).parent().remove();//remove element that was clicked
+        var currentFav= $(this).data('fav2');
+        // console.log(currentFav);
+        groceryList.child(userName + "/favs" + "/" + currentFav).remove();
+
+        localStorage.removeItem(currentFav);
+
+    });
+
 });
 
 
@@ -126,6 +139,7 @@ $(document).on("click", '.signIn', function (e) {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) { // User is signed in!
+            localStorage.clear();//clear localstorage when user logs in
 
             // Get profile pic and user's name from the Firebase user object.
             var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
@@ -150,7 +164,13 @@ $(document).on("click", '.signIn', function (e) {
                 }
 
             });
-            // We load currently existing chant messages.
+            groceryList.child(userName + "/favs").on("child_added", function (snapshot) {
+                console.log(snapshot.val());
+                if (snapshot.val() != null) {
+                    localStorage.setItem(snapshot.key, snapshot.val());
+                }
+
+            });
 
             // We save the Firebase Messaging Device token and enable notifications.
         } else { // User is signed out!
@@ -162,7 +182,8 @@ $(document).on("click", '.signIn', function (e) {
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) { // User is signed in!
-
+        $('#list-items').show();
+        $('#fav-items').empty();
         // Get profile pic and user's name from the Firebase user object.
         var profilePicUrl = user.photoURL;   // TODO(DEVELOPER): Get profile pic.
         var userName = user.displayName;        // TODO(DEVELOPER): Get user's name.
@@ -270,10 +291,10 @@ $('input:radio[name=options]').change(function (e) {
         var listings = groceryList.child(userName + "/favs");
         listings.on("child_added", function (snapshot) {
             console.log(snapshot.val());           
-            var favorite = $('#fav-items').append("<li class='listFav'><a class='favs' data-Fav='" + snapshot.val() + "'>" + snapshot.key + "</a><hr></li>");//sets checkbox and remove dynamically
+            var favorite = $('#fav-items').append("<li class='listFav'><a class='favs' data-Fav='" + snapshot.val() + "'>" + snapshot.key + "</a><a class='fav2' data-Fav2='"+snapshot.key+"'>x</a><hr></li>");//sets checkbox and remove dynamically
             $('#list-items').append(favorite);
         });
-        // $('#list-items').append("<li><a class='favs'>""</a><hr></li>");//sets checkbox and remove dynamically
+        // $('#list-items').append("<li class='listLi'><input class='checkbox' type='checkbox'/>" + item + "<a class='remove' data-name='" + item + "'>x</a><hr></li>");//sets checkbox and remove dynamically
     }
 });
 

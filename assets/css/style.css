@@ -730,8 +730,9 @@ h5 {/*title for card body*/
     }
 }
 
-/******************************************/
 
+
+/******************************************/
 .vegeIcon,.peanutIcon,.sugarIcon{
     height:1.3em;
 }
@@ -753,4 +754,10 @@ h5 {/*title for card body*/
 }
 .favStarColor{
     color:#9bbf42;
+ }
+
+ .fav2{
+        float:right;
+        padding-right:1em;
+        cursor: pointer;
     }
