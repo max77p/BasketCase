@@ -319,7 +319,6 @@ function randomize() {
             else {
                 imgH3[i].innerText = recipeImages[chosen[i]].metadata.article['name'];
             }
-
         }
     })
 }
