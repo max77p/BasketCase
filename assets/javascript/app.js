@@ -255,7 +255,7 @@ $('input:radio[name=options]').change(function (e) {
 
     if (radioBtn === "option2") {//for when user clicks completed button, then show only completed
     $('#fav-items').empty();
-        $('li:not(.completed)').hide();
+        $('.listLi:not(.completed)').hide();
         console.log(listitems[0].className);
         console.log(get[0].children)
     }
