@@ -570,11 +570,15 @@ $(document).on("click", '#favStar', function () {
 
 function favs(elId, elLink) {
     if (favorite) {
-        localStorage.setItem(elId, elLink);
+        localStorage.setItem('list-a',(elId, elLink));
     }
     else {
         localStorage.removeItem(elId, elLink);
     }
+    var user = firebase.auth().currentUser;
+    var userName = user.displayName;
+    // groceryList.child(userName + "/favs").push();//push grocery items to firebase
+    //         var listings = groceryList.child(userName + "/favs");
 }
 
 
